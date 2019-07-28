@@ -1,0 +1,93 @@
+page-invoice {
+
+    .box .date-filter {
+        padding: 0px 16px;
+        display: flex;
+        align-items: center;
+        margin: 16px 0px;
+    }
+
+    .box .date-filter button.button {
+        height: 36px;
+        outline: none;
+        border: none;
+        color: #FFFFFF;
+        background-color: #424242;
+        border-radius: 4px;
+        padding: 0px 40px;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    .box .date-filter .filter-label {
+        font-size: 8px;
+        text-transform: uppercase;
+        color: #006577;
+        font-weight: 600;
+    }
+    
+    .box .date-filter div {
+        margin-right: 16px;
+    }
+
+    .box .date-filter button {
+        outline: none;
+        border: none;
+        color: #FFFFFF;
+        height: 32px;
+        background-color: #006577;
+        border-radius: 5px;
+        padding: 0px 8px;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    // ejs-datepicker span {
+    //     margin-bottom: 0px !important;
+    // }
+
+    .cards > div {
+        height: 75%;
+        overflow-y: scroll;
+        padding: 8px;
+    }
+
+    .cards .card {
+        background-color: #FFFFFF;
+        border-radius: 4px;
+        box-shadow: 0px 0px 4px rgba(66,66,66,0.25);
+        font-size: 14px;
+        padding: 15px 20px;
+        color: #717171;
+        margin-bottom: 10px;
+    }
+
+    .cards .card .right {
+        margin-top: 5px;
+    }
+
+    .cards .card > div > p:first-child {
+        margin-bottom: 5px;
+    }
+
+    .cards .card .left .pending {
+        font-weight: 600;
+        color: #DD2626;
+    }
+
+    .cards .card .left .paid {
+        font-weight: 600;
+        color: #65A558;
+    }
+
+    .cards .card .text {
+        font-weight: normal;
+    }
+
+    .cards .card .date {
+        font-size: 10px;
+        text-transform: uppercase;
+    }
+}

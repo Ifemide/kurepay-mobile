@@ -1,0 +1,53 @@
+currency {
+    
+    .container {
+        // position: relative;
+        color: #424242;
+    }
+
+    .container .current {
+        font-size: 10px;
+        text-transform: uppercase;
+        // display: flex;
+        // align-items: center;
+        // justify-content: flex-end;
+        margin-top: -2.5px;
+        color: #FFFFFF;
+    }
+
+    .container .current i {
+        font-size: 18px;
+    }
+
+    .container > div {
+        z-index: 99999999999;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 100vh;
+        width: 100%;
+        background-color: rgba(0,0,0,0.32);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container > div .selectOverlay {
+        background-color: #FFFFFF;
+        font-size: 12px;
+        height: 400px;
+        width: 200px;
+        border-radius: 4px;
+        overflow-y: scroll;
+    }
+
+    .container > div .selectOverlay div {
+        padding: 10px 16px;
+        border-bottom: 0.5px solid #CBCBCB;
+        text-align: center;
+    }
+
+    .container > div .selectOverlay div:last-child {
+        border-bottom: none;
+    }
+}

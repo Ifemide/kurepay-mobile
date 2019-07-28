@@ -1,0 +1,93 @@
+<div class="transfer">
+  <div class="header">
+    <p>Invoice</p>
+    <div class="user-details">
+      <p>{{ localCurrency }} 48,888.00</p>
+      <div class="currency">
+        <currency></currency>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-menu">
+    <div class="container">
+      <div (click)="changeView('create')" [ngClass]="{'active' : viewBox === 'create'}">Create Invoice</div>
+      <div (click)="changeView('invoices')" [ngClass]="{'active' : viewBox === 'invoices'}">View Invoices</div>
+    </div>
+  </div>
+
+  <div class="box" *ngIf="viewBox === 'create'">
+    <form #createInvoice="ngForm" (ngSubmit)="onSubmit(createInvoice.value)">
+      <div class="kure-form">
+        <div class="form-inputs">
+          <div class="text-input">
+            <label>Receiver Email</label>
+            <input type="text" name="receiver_email" [(ngModel)]="receiver_email" placeholder="Enter Email of Reciever">
+          </div>
+          <div class="text-input">
+            <label>Due Date</label>
+            <input type="date" name="due_date" [(ngModel)]="due_date" placeholder="Choose Due Date">
+          </div>
+        </div>
+        <div class="kure-form-control">
+          <p class="add-to-form" (click)="doSomething()">
+            <i class="material-icons">add_circle</i>
+            <span>Add Outline Item</span>
+          </p>
+        </div>
+        <div class="submit-form">
+          <div>
+            <button>Send Invoice</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="box" *ngIf="viewBox === 'invoices'">
+
+    <div class="date-filter">
+      <button class="button" *ngIf="!activeFilter" (click)="showFilter()">Filter Transactions By Date</button>
+      <div *ngIf="activeFilter">
+        <p class="filter-label">Start Date</p>
+        <ejs-datepicker id='datepicker' placeholder='Select a date' [value]='dateValue' [min]='minDate' [max]='maxDate'>
+        </ejs-datepicker>
+      </div>
+      <div *ngIf="activeFilter">
+        <p class="filter-label">End Date</p>
+        <ejs-datepicker id='datepicker' placeholder='Select a date' [value]='dateValue' [min]='minDate' [max]='maxDate'>
+        </ejs-datepicker>
+      </div>
+      <button *ngIf="activeFilter">GO</button>
+    </div>
+
+    <div class="cards">
+      <div>
+        <div class="card">
+          <div class="left">
+            <p class="pending">[Pending]</p>
+            <p class="text">kendrawalker@yahoo.com</p>
+          </div>
+          <div class="right">
+            <p class="date"><span>Expires </span> Jul 11, 2019</p>
+            <p>4,500.00</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="left">
+            <p class="paid">[Paid]</p>
+            <p class="text">supply@richconfectionaries.com.ng</p>
+          </div>
+          <div class="right">
+            <p class="date"><span>Expires </span> Aug 26, 2019</p>
+            <p>18,750.00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<loader *ngIf="loader"></loader>
+
+<menu [activeMenu]="activeMenu"></menu>

@@ -1,0 +1,56 @@
+<div class="menu">
+  <div>
+    <div (click)="goToPage('Fund')" [ngClass]="{'active' : activeMenu === 'Fund'}">
+      <i class="material-icons">account_balance_wallet</i>
+      <p>Fund</p>
+    </div>
+    <div (click)="goToPage('Transfer')" [ngClass]="{'active' : activeMenu === 'Transfer'}">
+      <i class="material-icons">swap_horizontal_circle</i>
+      <p>Transfer</p>
+    </div>
+    <div (click)="goToPage('Bills')" [ngClass]="{'active' : activeMenu === 'Bills'}">
+      <i class="material-icons">power</i>
+      <p>Bills</p>
+    </div>
+    <div (click)="goToPage('Recharge')" [ngClass]="{'active' : activeMenu === 'Recharge'}">
+      <i class="material-icons">phone_iphone</i>
+      <p>Recharge</p>
+    </div>
+    <div (click)="showSubMenu()">
+      <i class="material-icons">menu</i>
+      <p>More</p>
+    </div>
+  </div>
+</div>
+
+<div class="inv-overlay" *ngIf="submenu" (click)="showSubMenu()"></div>
+
+<div class="sub-menu" *ngIf="submenu">
+  <div>
+    <div (click)="goToPage('Dashboard')" [ngClass]="{'active' : activeMenu === 'Dashboard'}">
+      <!--  class="active" -->
+      <i class="material-icons">tv</i>
+      <p>Dashboard</p>
+    </div>
+    <div (click)="goToPage('Profile')" [ngClass]="{'active' : activeMenu === 'Profile'}">
+      <i class="material-icons">account_circle</i>
+      <p>Profile</p>
+    </div>
+    <div (click)="goToPage('Invoice')" [ngClass]="{'active' : activeMenu === 'Invoice'}">
+      <i class="material-icons">description</i>
+      <p>Invoice</p>
+    </div>
+    <div (click)="goToPage('Transactions')" [ngClass]="{'active' : activeMenu === 'Transactions'}">
+      <i class="material-icons">dns</i>
+      <p>Transactions</p>
+    </div>
+    <div (click)="goToPage('Referral')" [ngClass]="{'active' : activeMenu === 'Referral'}">
+      <i class="material-icons">autorenew</i>
+      <p>Referral</p>
+    </div>
+    <div>
+      <i class="material-icons">power_settings_new</i>
+      <p>Logout</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="transfer">
+    <div class="header">
+        <p>Recharge Airtime and Data</p>
+        <div class="user-details">
+            <p>{{ localCurrency }} 48,888.00</p>
+            <div class="currency">
+                <currency></currency>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-menu">
+        <div class="container">
+            <div (click)="changeView('airtime')" [ngClass]="{'active' : viewBox === 'airtime'}">Airtime</div>
+            <div (click)="changeView('data')" [ngClass]="{'active' : viewBox === 'data'}">Data</div>
+        </div>
+    </div>
+    <p class="tab-menu-info" *ngIf="viewBox === 'card'">Note! You will be directed to a payment page to pay</p>
+    <p class="tab-menu-info" *ngIf="viewBox === 'transfer'">Transfer to the account below to fund your wallet</p>
+
+    <div class="box" *ngIf="viewBox === 'airtime'">
+        <form #airtimeForm="ngForm" (ngSubmit)="onSubmit(airtimeForm.value)">
+            <div class="kure-form">
+                <div class="form-inputs">
+                    <div class="select-input">
+                        <label>Network Provider</label>
+                        <div>
+                            <select value="" name="network_provider" [(ngModel)]="network_provider">
+                                <option value="">Choose Network Provider</option>
+                                <option value="1">MTN</option>
+                                <option value="2">Glo</option>
+                                <option value="3">9mobile</option>
+                                <option value="4">Airtel</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="text-input">
+                        <label>Phone Number</label>
+                        <input type="number" [(ngModel)]="phone_number" name="phone_number"
+                            placeholder="Enter Phone Number">
+                    </div>
+                    <div class="text-input">
+                        <label>Amount</label>
+                        <input type="number" [(ngModel)]="airtime_amount" name="airtime_amount"
+                            placeholder="Enter Airtime Amount">
+                    </div>
+                </div>
+                <div class="submit-form">
+                    <div>
+                        <button>Buy Airtime</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="box" *ngIf="viewBox === 'data'">
+        <form #dataForm="ngForm" (ngSubmit)="onSubmit(dataForm.value)">
+            <div class="kure-form">
+                <div class="form-inputs">
+                    <div class="select-input">
+                        <label>Data Provider</label>
+                        <div>
+                            <select value="" name="data_provider" [(ngModel)]="data_provider">
+                                <option value="">Choose Data Provider</option>
+                                <option value="1">MTN</option>
+                                <option value="2">Glo</option>
+                                <option value="2">Smile</option>
+                                <option value="3">9mobile</option>
+                                <option value="3">Spectranet</option>
+                                <option value="4">Airtel</option>
+                                <option value="5">Swift</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="text-input">
+                        <label>Phone or Account Number</label>
+                        <input type="number" [(ngModel)]="phone_or_account_no" name="phone_or_account_no"
+                            placeholder="Enter Number">
+                    </div>
+                    <div class="select-input">
+                        <label>Data Plan</label>
+                        <div>
+                            <select value="" name="data_plan" [(ngModel)]="data_plan">
+                                <option value="">Choose Data Plan</option>
+                                <option value="1">Option 1</option>
+                                <option value="1">Option 2</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="submit-form">
+                    <div>
+                        <button>Buy Data</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<loader *ngIf="loader"></loader>
+
+<menu [activeMenu]="activeMenu"></menu>

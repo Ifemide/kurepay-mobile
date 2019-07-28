@@ -1,0 +1,135 @@
+page-dashboard {
+    .dashboard {
+        background-color: #F5F5F5;
+    }
+
+    .dashboard .head {
+        background-color: #34495E;
+        color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dashboard .head .background {
+        width: 100%;
+        background-image: url("../../assets/imgs/bg-cover.png");
+    }
+
+    .dashboard .head .currency {
+        margin-top: 5px;
+        margin-bottom: 50px;
+    }
+
+    .dashboard p {
+        margin: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+    }
+
+    .dashboard .head h4 {
+        margin: 0;
+        text-align: center;
+    }
+
+    .dashboard .head .balance {
+        margin-bottom: 20px;
+    }
+
+    .dashboard .head .transactions {
+        margin-bottom: 55px;
+    }
+
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -20px;
+        margin-bottom: 20px;
+    }
+
+    .buttons .left {
+        margin-right: 10px;
+    }
+
+    .buttons button {
+        color: #F5F5F5;
+        font-size: 13px;
+        font-weight: 500;
+        background-color: #006577;
+        border-radius: 4px;
+        width: 160px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .buttons button i {
+        font-size: 20px;
+        margin-right: 5px;
+    }
+
+
+
+    .cards {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .cards .card {
+        width: 160px;
+        height: 115px;
+        border-radius: 4px;
+        box-shadow: 0px 0px 6px rgba(66,66,66,0.3);
+        background-color: #FFFFFF;
+        padding: 20px;
+    }
+
+    .cards .card.left {
+        margin-right: 10px;
+    }
+
+    .cards .card h3 {
+        margin: 0px;
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 15px;
+    }
+
+    .cards .card .options img.left {
+        margin-right: 10px;
+    }
+
+    .cards .card.bg-green {
+        background-color: #006577;
+        color: #FFFFFF;
+    }
+
+
+    .red-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .red-button button {
+        color: #F5F5F5;
+        font-size: 13px;
+        font-weight: 500;
+        background-color: #DD2626;
+        border-radius: 4px;
+        width: 330px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+}

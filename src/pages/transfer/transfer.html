@@ -1,0 +1,165 @@
+<div class="transfer">
+  <div class="header">
+    <p>Transfer Money</p>
+    <div class="user-details">
+      <p>{{ localCurrency }} 48,888.00</p>
+      <div class="currency">
+        <currency></currency>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="tab-menu">
+    <div class="container">
+      <div (click)="changeView('bank')" [ngClass]="{'active' : viewBox === 'bank'}">Bank Account</div>
+      <div (click)="changeView('crypto')" [ngClass]="{'active' : viewBox === 'crypto'}">Crypto Account</div>
+      <div (click)="changeView('wallet')" [ngClass]="{'active' : viewBox === 'wallet'}">Kurepay Wallet</div>
+    </div>
+  </div>
+  <p class="tab-menu-info" *ngIf="viewBox === 'bank'">Supported in Nigeria only for now</p>
+
+  <div class="box" *ngIf="viewBox === 'bank'">
+    <form (ngSubmit)="onSubmit(viaBankForm)" #viaBankForm="ngForm">
+      <div class="kure-form">
+        <div class="form-inputs">
+          <div class="text-input">
+            <div class="label-options">
+              <label [ngClass]="{'gray' : beneficiaries}" (click)="toggleBeneficiaries()">
+                <i class="material-icons">{{!beneficiaries ? 'radio_button_checked' : 'radio_button_unchecked'}}</i>
+                Account Number</label>
+              <label [ngClass]="{'gray' : !beneficiaries}" (click)="toggleBeneficiaries()">
+                <i class="material-icons">{{beneficiaries ? 'radio_button_checked' : 'radio_button_unchecked'}}</i>
+                Choose from beneficiaries</label>
+            </div>
+            <input *ngIf="!beneficiaries" type="text" name="account_num" [(ngModel)]="account_num"
+              placeholder="Enter Account Number">
+            <select *ngIf="beneficiaries" name="beneficiary_name" [(ngModel)]="beneficiary_name">
+              <option [ngValue]="undefined">Choose Beneficiaries</option>
+              <option *ngFor="let ben of benList" [ngValue]="ben.code">{{ ben.name }}</option>
+            </select>
+            <!-- Place the view that should be loaded when the other option is checked -->
+          </div>
+          <div class="select-input">
+            <label>Local Bank</label>
+            <div>
+              <select name="local_bank" [(ngModel)]="local_bank">
+                <option [ngValue]="undefined">Choose Bank</option>
+                <option *ngFor="let bank of banks" [ngValue]="bank.code">{{ bank.name }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="text-input-icon">
+            <label>Account Name</label>
+            <div>
+              <input type="text" value="0" name="account_name" [(ngModel)]="account_name" placeholder="Account Name"
+                disabled aria-disabled="disabled">
+              <i class="material-icons">lock</i>
+            </div>
+          </div>
+          <div class="text-input">
+            <label>Amount (NGN)</label>
+            <input type="number" name="trans_amount" [(ngModel)]="trans_amount" placeholder="Enter Amount to Transfer"
+              value="">
+          </div>
+          <div class="text-input-icon">
+            <label>Amount You Will Be Charged</label>
+            <div>
+              <input type="number" name="amount_charged" [(ngModel)]="amount_charged" value="0" placeholder="0" disabled
+                aria-disabled="disabled">
+              <i class="material-icons">lock</i>
+            </div>
+          </div>
+
+          <div class="otp-code" *ngIf="otpBank">
+            <div class="text-input">
+              <label class="white">Enter the OTP sent to your email</label>
+              <input type="number" name="otp_bank" [(ngModel)]="otp_bank" placeholder="Enter OTP">
+            </div>
+          </div>
+        </div>
+        <div class="submit-form">
+          <div class="side-text">
+            <button (click)="showBankOTP()" *ngIf="!otpBank">Generate OTP Code</button>
+            <button *ngIf="otpBank">Transfer Money</button>
+            <!-- <p>OTP timed out<br>Generate new OTP Code</p> Optional -->
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="box" *ngIf="viewBox === 'crypto'">
+    <form (ngSubmit)="onSubmit(viaCryptoForm)" #viaCryptoForm="ngForm">
+      <div class="kure-form">
+        <div class="form-inputs">
+          <div class="select-input">
+            <label>Cryptocurrency</label>
+            <div>
+              <select name="crypto_currency" [(ngModel)]="crypto_currency">
+                <option [ngValue]="undefined">Choose Cryptocurrency</option>
+                <option *ngFor="let crypto of cryptos" [ngValue]="crypto.code">{{ crypto.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="text-input">
+            <label>Cryptocurrency Wallet Address</label>
+            <input type="text" name="wallet_address" [(ngModel)]="wallet_address" placeholder="Enter Wallet Address">
+          </div>
+          <div class="text-input">
+            <label>Amount (NGN)</label>
+            <input type="number" value="" name="amount_to_transfer" [(ngModel)]="amount_to_transfer"
+              placeholder="Enter Amount to Transfer">
+          </div>
+          <div class="otp-code" *ngIf="otpCrypto">
+            <div class="text-input">
+              <label class="white">Enter the OTP sent to your email</label>
+              <input type="text" name="otp_crypto" [(ngModel)]="otp_crypto" placeholder="Enter OTP">
+            </div>
+          </div>
+        </div>
+        <div class="submit-form">
+          <div class="side-text">
+            <button (click)="showCryptoOTP()" *ngIf="!otpCrypto">Generate OTP Code</button>
+            <button *ngIf="otpCrypto">Transfer Money</button>
+            <!-- <p>OTP timed out<br>Generate new OTP Code</p> Optional -->
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="box" *ngIf="viewBox === 'wallet'">
+    <form (ngSubmit)="onSubmit(viaWalletForm)" #viaWalletForm="ngForm">
+      <div class="kure-form">
+        <div class="form-inputs">
+          <div class="text-input">
+            <label>Kurepay Recipient Email Address</label>
+            <input type="email" name="recipient_email" [(ngModel)]="recipient_email" placeholder="Enter Email Address">
+          </div>
+          <div class="text-input">
+            <label>Amount (NGN)</label>
+            <input type="number" name="amount_to_transfer" [(ngModel)]="amount_to_transfer"
+              placeholder="Enter Amount to Transfer">
+          </div>
+          <div class="otp-code" *ngIf="otpWallet">
+            <div class="text-input">
+              <label class="white">Enter the OTP sent to your email</label>
+              <input type="text" name="otp_wallet" [(ngModel)]="otp_wallet" placeholder="Enter OTP">
+            </div>
+          </div>
+        </div>
+        <div class="submit-form">
+          <div class="side-text">
+            <button (click)="showWalletOTP()" *ngIf="!otpWallet">Generate OTP Code</button>
+            <button *ngIf="otpWallet">Transfer Money</button>
+            <!-- <p>OTP timed out<br>Generate new OTP Code</p> Optional -->
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<loader *ngIf="loader"></loader>
+
+<menu [activeMenu]="activeMenu"></menu>

@@ -1,0 +1,73 @@
+<div class="dashboard">
+    <div class="head">
+        <div class="background">
+            <div class="currency">
+                <currency></currency>
+            </div>
+            <div class="balance">
+                <p>Account Balance</p>
+                <h4>{{ localCurrency }} 48,888.00</h4>
+            </div>
+            <div class="transactions">
+                <p><span>75 </span> Transactions in the last 7 days <a> View All</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button class="left">
+            <!-- (click)="openPage()" -->
+            <i class="material-icons">how_to_vote</i>
+            Receive Payment
+        </button>
+        <button>
+            <i class="material-icons">swap_horizontal_circle</i>
+            Transfer Money
+        </button>
+    </div>
+
+    <div class="cards">
+        <div class="card left">
+            <h3>Buy Airtime</h3>
+            <div class="options">
+                <img class="left" src="../../assets/imgs/mtn.png" alt="mtn">
+                <img src="../../assets/imgs/airtel.png" alt="airtel">
+            </div>
+        </div>
+        <div class="card bg-green">
+            <h3>Pay for TV</h3>
+            <div class="options">
+                <img class="left" src="../../assets/imgs/dstv.png" alt="dstv">
+                <img src="../../assets/imgs/gotv.png" alt="gotv">
+            </div>
+        </div>
+    </div>
+
+    <div class="red-button">
+        <button>
+            <i class="material-icons">casino</i>
+            Sports Betting with KurePay
+        </button>
+    </div>
+
+    <div class="cards">
+        <div class="card left">
+            <h3>Buy Airtime</h3>
+            <div class="options">
+                <img class="left" src="../../assets/imgs/mtn.png" alt="mtn">
+                <img src="../../assets/imgs/airtel.png" alt="airtel">
+            </div>
+        </div>
+        <div class="card bg-green">
+            <h3>Pay for TV</h3>
+            <div class="options">
+                <img class="left" src="../../assets/imgs/dstv.png" alt="dstv">
+                <img src="../../assets/imgs/gotv.png" alt="gotv">
+            </div>
+        </div>
+    </div>
+</div>
+
+<loader *ngIf="loader"></loader>
+
+<menu [activeMenu]="activeMenu"></menu>

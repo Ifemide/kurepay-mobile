@@ -1,0 +1,15 @@
+<!-- Generated template for the CurrencyComponent component 
+
+  *ngIf="!selectCode" 
+
+-->
+<div class="container">
+  <p (click)="showCountries()" class="current">{{ choiceCurrency }} <i class="material-icons">arrow_drop_down</i></p>
+  <div (click)="showCountries()" *ngIf="selectCode">
+    <div class="selectOverlay">
+      <div *ngFor="let country of countries">
+        <p (click)="chooseCountry(country)">{{country.country}} ({{country.currency_code}})</p>
+      </div>
+    </div>
+  </div>
+</div>
