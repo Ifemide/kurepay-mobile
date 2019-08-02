@@ -1,0 +1,49 @@
+<div class="signup">
+  <div class="top-box">
+    <div class="overlay">
+      <img src="../../assets/imgs/kp-logo-full.png" alt="">
+    </div>
+  </div>
+
+  <div class="form-box">
+    <form (ngSubmit)="signupUser(signup)" #signup="ngForm">
+      <div class="kure-form">
+        <div class="form-inputs">
+          <div class="text-input">
+            <input type="text" name="first_name" [(ngModel)]="first_name" placeholder="Enter First Name" value="">
+          </div>
+          <div class="text-input">
+            <input type="text" name="last_name" [(ngModel)]="last_name" placeholder="Enter Last Name" value="">
+          </div>
+          <div class="text-input">
+            <input type="number" name="phone_number" [(ngModel)]="phone_number" placeholder="Enter Phone Number"
+              value="">
+          </div>
+          <div class="text-input">
+            <input type="email" name="email_address" [(ngModel)]="email_address" placeholder="Enter Email" value="">
+          </div>
+          <div class="text-input">
+            <input type="password" name="password" [(ngModel)]="password" placeholder="Enter Password" value="">
+          </div>
+          <div class="text-input">
+            <input type="password" name="password2" [(ngModel)]="password2" placeholder="Re-enter Password" value="">
+          </div>
+        </div>
+        <div *ngIf="!notify" class="submit-form">
+          <div>
+            <button>Signup</button>
+          </div>
+        </div>
+        <div *ngIf="notify" class="error-box">
+          <p>{{ notifyText ? notifyText : 'Error!' }}</p>
+          <i class="material-icons" (click)="closeNotify()">cancel</i>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div (click)="goToPage('Login')" class="sub-button">
+    <p>Login</p>
+  </div>
+
+</div>

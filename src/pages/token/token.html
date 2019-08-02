@@ -1,0 +1,44 @@
+<div class="token">
+
+  <div class="middle">
+    <div class="form-box">
+      <form *ngIf="token" (ngSubmit)="checkToken(token)" #token="ngForm">
+        <div class="kure-form">
+          <div class="form-inputs">
+            <div class="text-input">
+              <input type="text" name="token_code" [(ngModel)]="token_code" placeholder="Enter token sent to your email"
+                value="">
+            </div>
+          </div>
+          <div *ngIf="!notify" class="submit-form">
+            <div>
+              <button>Verify Token</button>
+            </div>
+          </div>
+          <div *ngIf="notify" class="error-box">
+            <p>{{ notifyText ? notifyText : 'Error' }}</p>
+            <i class="material-icons" (click)="closeNotify()">cancel</i>
+          </div>
+        </div>
+      </form>
+
+      <form *ngIf="!token">
+        <div class="kure-form">
+          <div class="submit-form">
+            <div (click)="sendToken()">
+              <button>Resend Token</button>
+              <p style="text-align: center">{{ notifyText }}</p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div (click)="goToPage('Login')" class="sub-button">
+      <p>Cancel Verification</p>
+    </div>
+  </div>
+  <p class="trade-mark">KurePay™</p>
+
+
+</div>

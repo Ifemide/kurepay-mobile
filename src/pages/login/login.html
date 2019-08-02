@@ -1,0 +1,39 @@
+<div class="login">
+  <div class="top-box">
+    <div class="overlay">
+      <img src="../../assets/imgs/kp-logo-full.png" alt="">
+    </div>
+  </div>
+
+  <div class="form-box">
+    <form (ngSubmit)="loginUser(login)" #login="ngForm">
+      <div class="kure-form">
+        <div class="form-inputs">
+          <div class="text-input">
+            <input type="email" name="email_address" [(ngModel)]="email_address" placeholder="Enter Email" value="">
+          </div>
+          <div class="text-input">
+            <input type="password" name="password" [(ngModel)]="password" placeholder="Enter Password" value="">
+          </div>
+        </div>
+        <div *ngIf="!notify" class="submit-form">
+          <div>
+            <button>Login</button>
+          </div>
+        </div>
+        <div *ngIf="notify" class="error-box">
+          <p>{{ notifyText ? notifyText : 'Error!' }}</p>
+          <i class="material-icons" (click)="closeNotify()">cancel</i>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div (click)="goToPage('Signup')" class="sub-button">
+    <p>Signup</p>
+  </div>
+
+  <p class="trade-mark">KurePay™</p>
+
+
+</div>
