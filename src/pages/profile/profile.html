@@ -2,50 +2,51 @@
     <div class="header">
         <p>Profile</p>
         <div class="user-details">
-            <p>{{ localCurrency }} 48,888.00</p>
-            <div class="currency">
-                <currency></currency>
-            </div>
+            <p>{{ localCurrency }} {{ balance | number:'0.2' }}</p>
         </div>
     </div>
 
     <div class="tab-menu">
         <div class="container">
-            <div (click)="changeView('profile')" [ngClass]="{'active' : viewBox === 'profile'}">Update Profile</div>
-            <div (click)="changeView('password')" [ngClass]="{'active' : viewBox === 'password'}">Change Password</div>
+            <div (click)="changeView('profile')" [ngClass]="{'active' : viewBox === 'profile'}">Profile</div>
+            <div (click)="changeView('password')" [ngClass]="{'active' : viewBox === 'password'}">Password</div>
+            <div (click)="changeView('verify')" [ngClass]="{'active' : viewBox === 'verify'}">Verification</div>
         </div>
     </div>
     <!-- <p class="tab-menu-info" *ngIf="viewBox === 'card'">Note! You will be directed to a payment page to pay</p>
     <p class="tab-menu-info" *ngIf="viewBox === 'transfer'">Transfer to the account below to fund your wallet</p> -->
 
     <div class="box" *ngIf="viewBox === 'profile'">
-        <form #updateProfile="ngForm" (ngSubmit)="onSubmit(updateProfile.value)">
+        <form #updateProfile="ngForm" (ngSubmit)="onSubmit(updateProfile)">
             <div class="kure-form">
                 <div class="form-inputs">
-                    <div class="text-input">
+                    <div class="text-input" (click)="onSubmit(updateProfile)">
                         <label>First Name</label>
-                        <input type="text" name="first_name" [(ngModel)]="firstName" placeholder="Enter First Name">
+                        <input type="text" disabled aria-disabled="true" name="first_name" [(ngModel)]="firstName"
+                            placeholder="Enter First Name">
                     </div>
-                    <div class="text-input">
+                    <div class="text-input" (click)="onSubmit(updateProfile)">
                         <label>Last Name</label>
-                        <input type="text" name="last_name" [(ngModel)]="lastName" placeholder="Enter Last Name">
+                        <input type="text" disabled aria-disabled="true" name="last_name" [(ngModel)]="lastName"
+                            placeholder="Enter Last Name">
                     </div>
-                    <div class="text-input">
+                    <div class="text-input" (click)="onSubmit(updateProfile)">
                         <label>Email Address</label>
-                        <input type="email" name="email_address" [(ngModel)]="email" placeholder="Enter Email Address">
+                        <input type="email" disabled aria-disabled="true" name="email_address" [(ngModel)]="email"
+                            placeholder="Enter Email Address">
                     </div>
                 </div>
-                <div class="submit-form">
+                <!-- <div class="submit-form">
                     <div>
                         <button>Update Profile</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </form>
     </div>
 
     <div class="box" *ngIf="viewBox === 'password'">
-        <form #changePassword="ngForm">
+        <form #changePassword="ngForm" (onSubmit)="updatePassword(changePassword)">
             <div class="kure-form">
                 <div class="form-inputs">
                     <div class="text-input">
@@ -65,7 +66,42 @@
                 </div>
                 <div class="submit-form">
                     <div>
-                        <button (click)="checkNewPassword(changePassword)">Change Password</button>
+                        <button *ngIf="!loading" (click)="updatePassword(changePassword)">Change Password</button>
+                        <div *ngIf="loading" class="button">
+                            <img class="center" src="../../assets/icon/button-loader.gif" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="box" *ngIf="viewBox === 'verify'">
+        <form #kyc="ngForm" (ngSubmit)="kyCustomer(kyc)">
+            <div class="kure-form">
+                <div class="form-inputs">
+                    <div class="text-input">
+                        <label>Bank Verification Number (BVN)</label>
+                        <input type="text" name="bvn" [(ngModel)]="bvn" placeholder="Enter Your BVN">
+                    </div>
+                    <div class="text-input" *ngIf="otp">
+                        <label>Phone Number</label>
+                        <input type="text" name="phone_number" [(ngModel)]="phone_number"
+                            placeholder="Enter Your Phone Number">
+                    </div>
+                    <div class="otp-code" *ngIf="otp">
+                        <div class="text-input">
+                            <label class="white">Enter the OTP sent to your email</label>
+                            <input type="text" name="otp_bvn" [(ngModel)]="otp_bvn" placeholder="Enter OTP">
+                        </div>
+                    </div>
+                </div>
+                <div class="submit-form">
+                    <div>
+                        <button *ngIf="!loading">{{ refCode ? 'Complete' : 'Start' }} Verification</button>
+                        <div *ngIf="loading" class="button">
+                            <img class="center" src="../../assets/icon/button-loader.gif" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -73,6 +109,6 @@
     </div>
 </div>
 
-<loader *ngIf="loader"></loader>
+<popup *ngIf="popup" (click)="exitPopup()" [popup]="popupText"></popup>
 
 <menu [activeMenu]="activeMenu"></menu>

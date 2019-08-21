@@ -1,0 +1,85 @@
+<div class="transfer">
+  <div class="header">
+    <p>Utilities</p>
+    <div class="user-details">
+      <!-- <p>{{ localCurrency }}<br>{{ balance | number:'0.2' }}</p> -->
+      <p>{{ localCurrency }} {{ balance | number:'0.2' }}</p>
+    </div>
+  </div>
+
+  <div class="tab-menu">
+    <div class="container">
+      <div (click)="changeView('sms')" [ngClass]="{'active' : viewBox === 'sms'}">SMS</div>
+      <div (click)="changeView('waec')" [ngClass]="{'active' : viewBox === 'waec'}">Waec</div>
+    </div>
+  </div>
+
+  <p class="tab-menu-info" *ngIf="viewBox === 'waec'">Each Pin costs N{{ pinAmount | number:'0.2' }}</p>
+
+  <div class="box" *ngIf="viewBox === 'sms'">
+    <form #smsForm="ngForm" (ngSubmit)="sendSMS(smsForm)">
+      <div class="kure-form">
+        <div class="form-inputs">
+          <div class="select-input">
+            <label>SMS Routes</label>
+            <div>
+              <select name="sms_route" [(ngModel)]="sms_route">
+                <option [ngValue]="undefined">Choose a SMS Route</option>
+                <option *ngFor="let route of smsRoutes" [ngValue]="route.id">{{ route.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="text-input">
+            <label>Phone Number</label>
+            <input type="text" [(ngModel)]="phone_number" name="phone_number" placeholder="Enter Phone Number">
+          </div>
+          <div class="text-input">
+            <label>Text Message</label>
+            <textarea maxlength="160" [(ngModel)]="sms_text" name="sms_text" placeholder="Enter Text Here..">
+            </textarea>
+            <p>{{ sms_text ? sms_text.length : '0' }}/160</p>
+          </div>
+        </div>
+        <div class="submit-form">
+          <div>
+            <button *ngIf="!loading">Send SMS</button>
+            <div *ngIf="loading" class="button">
+              <img class="center" src="../../assets/icon/button-loader.gif" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="box" *ngIf="viewBox === 'waec'">
+    <form #waecForm="ngForm" (ngSubmit)="buyWAEC(waecForm)">
+      <div class="kure-form">
+        <div class="form-inputs">
+          <div class="text-input">
+            <label>Number of Scratch Pins</label>
+            <input type="text" (input)="calcAmount(scratch_pins)" [(ngModel)]="scratch_pins" name="scratch_pins"
+              placeholder="Enter Number of Pins to Purchase">
+          </div>
+          <div class="text-input-icon">
+            <label>Amount</label>
+            <p class="display">{{ totalAmount | number:'0.2' }}</p>
+          </div>
+        </div>
+        <div class="submit-form">
+          <div>
+            <button *ngIf="!loading">Buy WAEC Pins</button>
+            <div *ngIf="loading" class="button">
+              <img class="center" src="../../assets/icon/button-loader.gif" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<popup *ngIf="popup" (click)="exitPopup()" [popup]="popupText"></popup>
+
+<menu [activeMenu]="activeMenu"></menu>

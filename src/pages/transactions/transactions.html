@@ -2,10 +2,7 @@
   <div class="header">
     <p>Transactions (NGN)</p>
     <div class="user-details">
-      <p>{{ localCurrency }} 48,888.00</p>
-      <div class="currency">
-        <currency></currency>
-      </div>
+      <p>{{ localCurrency }} {{ balance | number:'0.2' }}</p>
     </div>
   </div>
 
@@ -24,122 +21,126 @@
     <button *ngIf="activeFilter">GO</button>
   </div>
 
-  <div class="cards">
-    <div>
-      <div class="card">
-        <div class="left">
-          <p class="to">[To]</p>
-          <p class="text">Baywise Technologies Ltd.</p>
-        </div>
-        <div class="right">
-          <p class="date">Jul 11, 2019</p>
-          <p class="red">12,500.00</p>
-        </div>
+  <div *ngIf="loading" class="button">
+    <img class="center" src="../../assets/icon/button-loader.gif" alt="">
+  </div>
+  <div *ngIf="!loading" class="cards">
+    <div class="card" *ngFor="let transaction of transactions">
+      <div class="left">
+        <p class="to">[{{ transaction.isCredit ? 'From' : 'To' }}]</p>
+        <p class="text">{{ transaction.isCredit ? transaction.from : transaction.to }}</p>
       </div>
-      <div class="card">
-        <div class="left">
-          <p class="from">[From]</p>
-          <p class="text">Baywise Technologies Ltd.</p>
-        </div>
-        <div class="right">
-          <p class="date">Jul 11, 2019</p>
-          <p class="green">34,000.00</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="left">
-          <p class="to">[To]</p>
-          <p class="text">Baywise Technologies Ltd.</p>
-        </div>
-        <div class="right">
-          <p class="date">Jul 11, 2019</p>
-          <p class="red">12,500.00</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="left">
-          <p class="to">[To]</p>
-          <p class="text">Baywise Technologies Ltd.</p>
-        </div>
-        <div class="right">
-          <p class="date">Jul 11, 2019</p>
-          <p class="red">12,500.00</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="left">
-          <p class="from">[From]</p>
-          <p class="text">Baywise Technologies Ltd.</p>
-        </div>
-        <div class="right">
-          <p class="date">Jul 11, 2019</p>
-          <p class="green">34,000.00</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="left">
-          <p class="to">[To]</p>
-          <p class="text">Baywise Technologies Ltd.</p>
-        </div>
-        <div class="right">
-          <p class="date">Jul 11, 2019</p>
-          <p class="red">12,500.00</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="left">
-          <p class="to">[To]</p>
-          <p class="text">Baywise Technologies Ltd.</p>
-        </div>
-        <div class="right">
-          <p class="date">Jul 11, 2019</p>
-          <p class="red">12,500.00</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="left">
-          <p class="to">[To]</p>
-          <p class="text">Baywise Technologies Ltd.</p>
-        </div>
-        <div class="right">
-          <p class="date">Jul 11, 2019</p>
-          <p class="red">12,500.00</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="left">
-          <p class="to">[To]</p>
-          <p class="text">Baywise Technologies Ltd.</p>
-        </div>
-        <div class="right">
-          <p class="date">Jul 11, 2019</p>
-          <p class="red">12,500.00</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="left">
-          <p class="to">[To]</p>
-          <p class="text">Baywise Technologies Ltd.</p>
-        </div>
-        <div class="right">
-          <p class="date">Jul 11, 2019</p>
-          <p class="red">12,500.00</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="left">
-          <p class="to">[To]</p>
-          <p class="text">Baywise Technologies Ltd.</p>
-        </div>
-        <div class="right">
-          <p class="date">Jul 11, 2019</p>
-          <p class="red">12,500.00</p>
-        </div>
+      <div class="right">
+        <p class="date">{{ transaction.createdAt | date }}</p>
+        <p [class.green]="transaction.isCredit" [class.red]="!transaction.isCredit">
+          {{ transaction.isCredit ? transaction.receivedCurrency : transaction.sentCurrency }}
+          {{ transaction.isCredit ? transaction.originalAmount : transaction.originalAmount | number:'0.2' }}
+        </p>
       </div>
     </div>
+    <!-- <div class="card">
+      <div class="left">
+        <p class="from">[From]</p>
+        <p class="text">Baywise Technologies Ltd.</p>
+      </div>
+      <div class="right">
+        <p class="date">Jul 11, 2019</p>
+        <p class="green">34,000.00</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="left">
+        <p class="to">[To]</p>
+        <p class="text">Baywise Technologies Ltd.</p>
+      </div>
+      <div class="right">
+        <p class="date">Jul 11, 2019</p>
+        <p class="red">12,500.00</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="left">
+        <p class="to">[To]</p>
+        <p class="text">Baywise Technologies Ltd.</p>
+      </div>
+      <div class="right">
+        <p class="date">Jul 11, 2019</p>
+        <p class="red">12,500.00</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="left">
+        <p class="from">[From]</p>
+        <p class="text">Baywise Technologies Ltd.</p>
+      </div>
+      <div class="right">
+        <p class="date">Jul 11, 2019</p>
+        <p class="green">34,000.00</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="left">
+        <p class="to">[To]</p>
+        <p class="text">Baywise Technologies Ltd.</p>
+      </div>
+      <div class="right">
+        <p class="date">Jul 11, 2019</p>
+        <p class="red">12,500.00</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="left">
+        <p class="to">[To]</p>
+        <p class="text">Baywise Technologies Ltd.</p>
+      </div>
+      <div class="right">
+        <p class="date">Jul 11, 2019</p>
+        <p class="red">12,500.00</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="left">
+        <p class="to">[To]</p>
+        <p class="text">Baywise Technologies Ltd.</p>
+      </div>
+      <div class="right">
+        <p class="date">Jul 11, 2019</p>
+        <p class="red">12,500.00</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="left">
+        <p class="to">[To]</p>
+        <p class="text">Baywise Technologies Ltd.</p>
+      </div>
+      <div class="right">
+        <p class="date">Jul 11, 2019</p>
+        <p class="red">12,500.00</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="left">
+        <p class="to">[To]</p>
+        <p class="text">Baywise Technologies Ltd.</p>
+      </div>
+      <div class="right">
+        <p class="date">Jul 11, 2019</p>
+        <p class="red">12,500.00</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="left">
+        <p class="to">[To]</p>
+        <p class="text">Baywise Technologies Ltd.</p>
+      </div>
+      <div class="right">
+        <p class="date">Jul 11, 2019</p>
+        <p class="red">12,500.00</p>
+      </div>
+    </div> -->
   </div>
 </div>
 
-<loader *ngIf="loader"></loader>
+<popup *ngIf="popup" (click)="exitPopup()" [popup]="popupText"></popup>
 
 <menu [activeMenu]="activeMenu"></menu>

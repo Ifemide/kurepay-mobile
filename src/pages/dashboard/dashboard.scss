@@ -7,18 +7,14 @@ page-dashboard {
         background-color: #34495E;
         color: #FFFFFF;
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
+        height: 200px;
     }
 
     .dashboard .head .background {
         width: 100%;
         background-image: url("../../assets/imgs/bg-cover.png");
-    }
-
-    .dashboard .head .currency {
-        margin-top: 5px;
-        margin-bottom: 50px;
     }
 
     .dashboard p {
@@ -35,11 +31,26 @@ page-dashboard {
     }
 
     .dashboard .head .balance {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
     .dashboard .head .transactions {
-        margin-bottom: 55px;
+        color: rgba(245,245,245,0.75);
+    }
+
+    .dashboard .head .transactions p span {
+        font-weight: 600;
+        margin-right: 2.5px;
+        color: #F5F5F5;
+    }
+
+    .dashboard .head .transactions p a {
+        color: rgba(245,245,245,0.75);
+        text-decoration: underline;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-left: 2.5px;
+        font-size: 8px;
     }
 
 

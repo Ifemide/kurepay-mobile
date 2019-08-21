@@ -44,25 +44,10 @@ page-transactions {
         font-weight: 600;
     }
 
-    // ejs-datepicker span {
-    //     margin-bottom: 0px !important;
-    // }
-
-    // .cards {
-    //     padding: 0px 16px;
-    //     height: calc(100% - 150px);
-    //     overflow-y: scroll;
-    // }
-
     .cards {
-        padding: 0px 16px;
-        height: 100%;
-    }
-
-    .cards > div {
-        height: 75%;
+        padding: 4px 16px;
+        height: calc(100vh - 180px);
         overflow-y: scroll;
-        padding: 8px;
     }
 
     .cards .card {

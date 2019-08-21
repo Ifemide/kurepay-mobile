@@ -18,6 +18,11 @@ export class SignupPage {
 
   notify = false;
   notifyText = '';
+  popup = false;
+  popupText = {
+    type: '',
+    text: ''
+  };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public _api: ApiProvider) {
   }
@@ -34,13 +39,17 @@ export class SignupPage {
       "phone": "0" + String(data.value.phone_number),
       "email": data.value.email_address,
       "password": data.value.password,
-      "password2": data.value.password2
+      "confirmpassword": data.value.password2
     }
     this._api.signup(formData).subscribe((res: any) => {
-      if (res.status === 'ok') {
+      console.log(res);
+      if (res.status === true) {
         this.navCtrl.setRoot('TokenPage', {
           email: data.value.email_address
         });
+      } else if (res.status === false) {
+        this.notify = true;
+        this.notifyText = res.message;
       }
     }, err => {
       if (err.error.status === false) {
@@ -57,6 +66,18 @@ export class SignupPage {
 
   goToPage(title) {
     this.navCtrl.setRoot(title + 'Page');
+  }
+
+  showPopup(type, text) {
+    this.popupText = {
+      type: type,
+      text: text
+    };
+    this.popup = true;
+  }
+
+  exitPopup() {
+    this.popup = false;
   }
 
 }

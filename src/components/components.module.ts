@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 import { MenuComponent } from './menu/menu';
 import { CurrencyComponent } from './currency/currency';
-import { LoaderComponent } from './loader/loader';
+import { PopupComponent } from './popup/popup';
 
 @NgModule({
-	declarations: [MenuComponent,
-    CurrencyComponent,
-    LoaderComponent],
-	imports: [IonicModule],
-	exports: [MenuComponent,
-    CurrencyComponent,
-    LoaderComponent]
+    declarations: [MenuComponent,
+        CurrencyComponent,
+        PopupComponent],
+    imports: [IonicModule],
+    exports: [MenuComponent,
+        CurrencyComponent,
+        PopupComponent]
 })
 
 export class ComponentsModule { }

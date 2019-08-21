@@ -70,8 +70,9 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .header {
     background-color: #34495E;
-    color: #F5F5F5;
-    height: 45px;
+    color: #FFFFFF;
+    // color: #F5F5F5;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -84,7 +85,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .header > p {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
 }
 
@@ -94,7 +95,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .header .user-details > p {
-    font-size: 12px;
+    font-size: 14px;
     color: rgba(245,245,245,0.8);
     font-weight: 300;
 }
@@ -133,6 +134,14 @@ p, h1, h2, h3, h4, h5, h6 {
     width: 100%;
 }
 
+.kure-form .form-inputs .text-input > p {
+    font-size: 12px;
+    color: #959595;
+    text-align: right;
+    margin-top: -25px;
+    margin-right: 10px;
+}
+
 .kure-form .form-inputs > div {
     margin-bottom: 15px;
 }
@@ -142,7 +151,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .kure-form .form-inputs label {
-    font-size: 9px;
+    font-size: 10px;
     text-transform: uppercase;
     font-weight: 500;
     color: #418298;
@@ -188,7 +197,8 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .kure-form .form-inputs input,
-.kure-form .form-inputs select {
+.kure-form .form-inputs select,
+.kure-form .form-inputs textarea {
     border: none;
     outline: none;
     width: 100%;
@@ -198,17 +208,33 @@ p, h1, h2, h3, h4, h5, h6 {
     border-radius: 2px;
     padding: 0px 20px;
     padding-right: 52px;
-    font-size: 12px;
-    color: #717171;
+    font-size: 13px;
+    color: #5D5D5D;
 }
 
-.kure-form .form-inputs input::placeholder {
+.kure-form .form-inputs input::placeholder,
+.kure-form .form-inputs textarea::placeholder {
     color: #BCBCBC;
     text-transform: capitalize;
 }
 
+.kure-form .form-inputs textarea {
+    height: 120px;
+    padding: 16px 20px;
+}
+
 .kure-form .form-inputs input:focus {
     box-shadow: 0px 0px 6px rgba(65, 130, 152,0.16);
+}
+
+.display {
+    border: none;
+    padding: 0px;
+    box-shadow: none;
+    font-size: 12px;
+    color: #717171;
+    height: 24px;
+    line-height: 24px;
 }
 
 .kure-form .form-inputs .text-input-icon > div,
@@ -266,7 +292,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
 
 .kure-form .submit-form > div {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .kure-form .submit-form button {
@@ -280,6 +306,7 @@ p, h1, h2, h3, h4, h5, h6 {
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 600;
+    width: 100%;
 }
 
 .kure-form .submit-form > div p {
@@ -352,7 +379,7 @@ p, h1, h2, h3, h4, h5, h6 {
 .menu p {
     margin: 0px;
     text-transform: uppercase;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
 }
 
@@ -366,11 +393,11 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .sub-menu {
-    width: 160px;
+    width: 180px;
     box-shadow: 0px 0px 6px rgba(66,66,66,0.35);
     border-radius: 5px;
     color: #424242;
-    font-size: 12px;
+    font-size: 14px;
     overflow: hidden;
     position: absolute;
     right: 10px;
@@ -382,7 +409,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .sub-menu > div div {
     display: flex;
-    padding: 10px 16px;
+    padding: 12px 16px;
     align-items: center;
     border-bottom: 0.5px solid #F5F5F5;
 }
@@ -417,7 +444,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .tab-menu {
     padding: 0px 16px;
-    font-size: 10px;
+    font-size: 12px;
     text-transform: uppercase;
     font-weight: 500;
     color: #424242;
@@ -464,15 +491,38 @@ p, h1, h2, h3, h4, h5, h6 {
 .box {
     padding: 0px 16px;
     margin-top: 16px;
-    height: calc(100% - 120px);
+    height: calc(100vh - 180px);
     overflow-y: scroll;
 }
 
 .tab-menu-info {
-    color: #959595;
-    color: #DD2626;
     color: #FC5D00;
-    font-size: 8px;
+    font-size: 10px;
+    line-height: 13px;
     text-align: center;
     margin-top: 5px;
+}
+
+.form-tab-menu-info {
+    color: #959595;
+    font-size: 10px;
+    line-height: 15px;
+    text-align: center;
+    margin-top: 5px;
+    font-weight: normal;
+    padding: 0px 16px;
+}
+
+.form-tab-menu-info span {
+    font-weight: 600;
+}
+
+.button {
+    width: 100%;
+    border-radius: 4px;
+    height: 40px;
+}
+
+.button .center {
+    margin: 0 auto;
 }

@@ -7,7 +7,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { DataProvider } from '../providers/data/data';
 import { ApiProvider } from '../providers/api/api';
-import { HttpClientModule } from '@angular/common/http';
+
+import { IonicStorageModule } from '@ionic/storage';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorProvider } from '../providers/interceptor/interceptor';
+
+import { QRCodeModule } from 'angularx-qrcode';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   declarations: [
@@ -16,7 +22,9 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    QRCodeModule,
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -27,7 +35,9 @@ import { HttpClientModule } from '@angular/common/http';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataProvider,
-    ApiProvider
+    ApiProvider,
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi: true },
+    InAppBrowser
   ]
 })
 export class AppModule { }

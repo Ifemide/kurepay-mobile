@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -13,9 +14,16 @@ export class TokenPage {
   notify = false;
   notifyText = '';
   email: String;
+  popup = false;
+  popupText = {
+    type: '',
+    text: ''
+  };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public _api: ApiProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public _api: ApiProvider,
+    private storage: Storage) {
     this.email = this.navParams.get('email');
+    console.log(this.email);
   }
 
   ionViewDidLoad() {
@@ -27,17 +35,24 @@ export class TokenPage {
       "token": data.value.token_code
     }
     this._api.token(formData).subscribe((res: any) => {
-      if (res.status === 'Ok') {
-        this.goToPage('Dashboard');
+      console.log(res);
+      if (res.token) {
+        // this.loading = false;
+        this.storage.set('auth_token', res.token);
+        this.storage.set('email', res.email);
+        this.storage.set('first_name', res.firstname);
+        this.storage.set('last_name', res.lastname);
+        this.storage.set('balance', res.balance);
+        this.goToPage('Fund');
       }
     }, err => {
       console.log(err.error);
-      if (err.error.type) {
+      if (err.error.status === false) {
         this.notify = true;
-        this.notifyText = err.error.msg;
-        if (err.error.msg === "Invalid Token") {
+        this.notifyText = err.error.message;
+        if (err.error.message === "Invalid Token") {
           this.token = false;
-          this.notifyText = err.error.msg;
+          this.notifyText = err.error.message;
           this.notifyText += '. Click to resend token to your email address';
         }
         data.reset();
@@ -50,7 +65,7 @@ export class TokenPage {
       "email": this.email
     }
     this._api.resendToken(formData).subscribe((res: any) => {
-      if (res.status === 'ok') {
+      if (res.status === true) {
         this.token = true;
       }
     }, err => {
@@ -69,6 +84,18 @@ export class TokenPage {
 
   goToPage(title) {
     this.navCtrl.setRoot(title + 'Page');
+  }
+
+  showPopup(type, text) {
+    this.popupText = {
+      type: type,
+      text: text
+    };
+    this.popup = true;
+  }
+
+  exitPopup() {
+    this.popup = false;
   }
 
 }

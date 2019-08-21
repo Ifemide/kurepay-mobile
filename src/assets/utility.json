@@ -1,0 +1,579 @@
+{
+    "Data": [
+        {
+            "id": "17",
+            "name": "Spectranet",
+            "bundles": [
+                {
+                    "bundleCode": "500",
+                    "code": "500",
+                    "name": "N500 Bundle",
+                    "amount": 500,
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "1000",
+                    "code": "1000",
+                    "name": "N1000 Bundle",
+                    "amount": 1000,
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "2000",
+                    "code": "2000",
+                    "name": "N2000 Bundle",
+                    "amount": 2000,
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "5000",
+                    "code": "5000",
+                    "name": "N5000 Bundle",
+                    "amount": 5000,
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "7000",
+                    "code": "7000",
+                    "name": "N7000 Bundle",
+                    "amount": 7000,
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "10000",
+                    "code": "10000",
+                    "name": "N10000 Bundle",
+                    "amount": 10000,
+                    "quantity": "1"
+                }
+            ]
+        },
+        {
+            "id": "18",
+            "name": "Smile",
+            "bundles": []
+        },
+        {
+            "id": "29",
+            "name": "Airtel",
+            "bundles": [
+                {
+                    "bundleCode": "001",
+                    "code": "001",
+                    "name": "10MB(+1MB) 1Day",
+                    "amount": "50",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "002",
+                    "code": "002",
+                    "name": "50MB(+5MB) 1Day",
+                    "amount": "100",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "003",
+                    "code": "003",
+                    "name": "200MB(+20MB) 3Days",
+                    "amount": "200",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "004",
+                    "code": "004",
+                    "name": "350MB(+35MB) 7Days",
+                    "amount": "300",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "005",
+                    "code": "005",
+                    "name": "750MB(+75MB) 14Days",
+                    "amount": "5000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "006",
+                    "code": "006",
+                    "name": "1.5GB(+152.4MB) 30Days",
+                    "amount": "1000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "007",
+                    "code": "007",
+                    "name": "3.5GB(+357.2MB) 30Days",
+                    "amount": "2000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "008",
+                    "code": "008",
+                    "name": "5GB+512MB) 30Days",
+                    "amount": "2500",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "009",
+                    "code": "009",
+                    "name": "7GB(+716.8MB) 30Days",
+                    "amount": "3500",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "010",
+                    "code": "010",
+                    "name": "9GB(+921.6MB) 30Days",
+                    "amount": "4000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "011",
+                    "code": "011",
+                    "name": "10GB(+1GB) 30Days",
+                    "amount": "5000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "012",
+                    "code": "012",
+                    "name": "16GB(+1.6GB) 30Days",
+                    "amount": "8000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "013",
+                    "code": "013",
+                    "name": "22GB(+2.2GB) 30Days",
+                    "amount": "10000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "014",
+                    "code": "014",
+                    "name": "30GB(+3GB) 60Days",
+                    "amount": "15000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "015",
+                    "code": "015",
+                    "name": "50GB(+5GB) 180Days",
+                    "amount": "36000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "016",
+                    "code": "016",
+                    "name": "100GB(+10GB) 365Days",
+                    "amount": "70000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "017",
+                    "code": "017",
+                    "name": "200GB(+20GB) 365Days",
+                    "amount": "136000",
+                    "quantity": "1"
+                }
+            ]
+        },
+        {
+            "id": "30",
+            "name": "MTN",
+            "bundles": [
+                {
+                    "bundleCode": "104",
+                    "code": "104",
+                    "name": "50MB 24Hrs",
+                    "amount": "100",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "113",
+                    "code": "113",
+                    "name": "150MB 24Hrs",
+                    "amount": "200",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "102",
+                    "code": "102",
+                    "name": "150MB 7Days",
+                    "amount": "300",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "103",
+                    "code": "103",
+                    "name": "500MB(+250MB) 7Days",
+                    "amount": "500",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "106",
+                    "code": "106",
+                    "name": "1GB(+500MB) 30Days",
+                    "amount": "1000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "130",
+                    "code": "130",
+                    "name": "1.5GB 30Days",
+                    "amount": "1200",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "110",
+                    "code": "110",
+                    "name": "2.5GB(+1G) 30Days",
+                    "amount": "2000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "107",
+                    "code": "107",
+                    "name": "5GB 30Days",
+                    "amount": "3500",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "116",
+                    "code": "116",
+                    "name": "10GB 30Days",
+                    "amount": "5000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "117",
+                    "code": "117",
+                    "name": "22GB 30Days",
+                    "amount": "10000",
+                    "quantity": "1"
+                }
+            ]
+        },
+        {
+            "id": "31",
+            "name": "9mobile",
+            "bundles": [
+                {
+                    "bundleCode": "200",
+                    "code": "200",
+                    "name": "150MB 7Days",
+                    "amount": "200",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "1000",
+                    "code": "1000",
+                    "name": "1GB 30Days",
+                    "amount": "1000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "1200",
+                    "code": "1200",
+                    "name": "1.5GB 30Days",
+                    "amount": "1200",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "2000",
+                    "code": "2000",
+                    "name": "2.5GB 30Days",
+                    "amount": "2000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "3000",
+                    "code": "3000",
+                    "name": "4GB 30Days",
+                    "amount": "3000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "4000",
+                    "code": "4000",
+                    "name": "5.5GB 30Days",
+                    "amount": "4000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "8000",
+                    "code": "8000",
+                    "name": "11.5GB 30Days",
+                    "amount": "8000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "10000",
+                    "code": "10000",
+                    "name": "15GB 30Days",
+                    "amount": "10000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "27500",
+                    "code": "27500",
+                    "name": "30GB 90Days",
+                    "amount": "27500",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "55000",
+                    "code": "55000",
+                    "name": "60GB 180Days",
+                    "amount": "55000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "84992",
+                    "code": "84992",
+                    "name": "100GB 100Days",
+                    "amount": "84992",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "110000",
+                    "code": "110000",
+                    "name": "120GB 365Days",
+                    "amount": "110000",
+                    "quantity": "1"
+                }
+            ]
+        },
+        {
+            "id": "32",
+            "name": "Glo",
+            "bundles": [
+                {
+                    "bundleCode": "DATA-21",
+                    "code": "DATA-21",
+                    "name": "80MB(+10MB) 1Day",
+                    "amount": "100",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "DATA-28",
+                    "code": "DATA-28",
+                    "name": "210MB(+52MB) 5Days",
+                    "amount": "200",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "DATA-27",
+                    "code": "DATA-27",
+                    "name": "800MB(+200MB) 14Days",
+                    "amount": "500",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "DATA-2",
+                    "code": "DATA-2",
+                    "name": "1.6GB(+400MB) 30Days",
+                    "amount": "1000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "DATA-25",
+                    "code": "DATA-25",
+                    "name": "3.65GB(+850MB) 30Days",
+                    "amount": "2000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "DATA-19",
+                    "code": "DATA-19",
+                    "name": "5.75GB(+1.45GB) 30Days",
+                    "amount": "2500",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "DATA-23",
+                    "code": "DATA-23",
+                    "name": "7GB(+1.75GB) 30Days",
+                    "amount": "3000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "DATA-12",
+                    "code": "DATA-12",
+                    "name": "10GB(+2.5GB) 30Days",
+                    "amount": "4000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "DATA-5",
+                    "code": "DATA-5",
+                    "name": "12.5GB(+3.1GB) 30Days",
+                    "amount": "5000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "DATA-4",
+                    "code": "DATA-4",
+                    "name": "20GB(+5GB) 30Days",
+                    "amount": "8000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "DATA-10",
+                    "code": "DATA-10",
+                    "name": "26GB(+6.5GB) 30Days",
+                    "amount": "10000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "DATA-11",
+                    "code": "DATA-11",
+                    "name": "42GB(+10.5GB) 30Days",
+                    "amount": "15000",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "DATA-20",
+                    "code": "DATA-20",
+                    "name": "50GB(+12.5GB) 30Days",
+                    "amount": "18000",
+                    "quantity": "1"
+                }
+            ]
+        }
+    ],
+    "Airtime": [
+        {
+            "id": "6",
+            "name": "Airtel Airtime"
+        },
+        {
+            "id": "7",
+            "name": "MTN Airtime"
+        },
+        {
+            "id": "8",
+            "name": "Glo Airtime"
+        },
+        {
+            "id": "9",
+            "name": "9mobile Airtime"
+        }
+    ],
+    "TV": [
+        {
+            "id": "16",
+            "name": "Startimes",
+            "bundles": [
+                {
+                    "bundleCode": "900",
+                    "code": "900",
+                    "name": "Nova",
+                    "amount": "900",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "1300",
+                    "code": "1300",
+                    "name": "Basic",
+                    "amount": "1300",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "2600",
+                    "code": "2600",
+                    "name": "Classic",
+                    "amount": "2600",
+                    "quantity": "1"
+                },
+                {
+                    "bundleCode": "3800",
+                    "code": "3800",
+                    "name": "Unique",
+                    "amount": "3800",
+                    "quantity": "1"
+                }
+            ]
+        },
+        {
+            "id": "15",
+            "name": "GOTV",
+            "bundles": []
+        },
+        {
+            "id": "14",
+            "name": "DSTV",
+            "bundles": []
+        }
+    ],
+    "Education": [
+        {
+            "id": "5",
+            "name": "WAEC Scratch Card"
+        }
+    ],
+    "Electricity": [
+        {
+            "id": "4",
+            "name": "Port Harcourt Electricity Payment - PREPAID"
+        },
+        {
+            "id": "27",
+            "name": "Port Harcourt Electricity Payment - POSTPAID"
+        },
+        {
+            "id": "28",
+            "name": "Enugu Electricity Payment - PREPAID"
+        },
+        {
+            "id": "25",
+            "name": "Enugu Electricity Payment - POSTPAID"
+        },
+        {
+            "id": "1",
+            "name": "Ikeja Electricity Payment - PREPAID"
+        },
+        {
+            "id": "10",
+            "name": "Ikeja Electricity Payment - POSTPAID"
+        },
+        {
+            "id": "12",
+            "name": "Eko Electricity Payment - PREPAID"
+        },
+        {
+            "id": "13",
+            "name": "Eko Electricity Payment - POSTPAID"
+        },
+        {
+            "id": "11",
+            "name": "Ibadan Electricity Payment - PREPAID"
+        },
+        {
+            "id": "33",
+            "name": "Ibadan Electricity Payment - POSTPAID"
+        },
+        {
+            "_id": "2",
+            "name": "Abuja Electricity Payment - PREPAID"
+        },
+        {
+            "id": "36",
+            "name": "RensourceEnergy Payment"
+        }
+    ],
+    "SMS": [
+        {
+            "id": "21",
+            "name": "Normal Route"
+        },
+        {
+            "id": "22",
+            "name": "DND Route"
+        },
+        {
+            "id": "23",
+            "name": "Corporate Route"
+        }
+    ]
+}

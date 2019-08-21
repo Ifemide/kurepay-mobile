@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'menu',
@@ -11,9 +12,7 @@ export class MenuComponent {
   view = '';
   submenu = false;
 
-  constructor(public navCtrl: NavController) {
-    console.log('Hello MenuListComponent Component');
-
+  constructor(public navCtrl: NavController, private storage: Storage) {
   }
 
   ionViewDidLoad() {
@@ -30,6 +29,11 @@ export class MenuComponent {
     this.navCtrl.setRoot(title + 'Page');
     this.view = title;
     console.log(this.view);
+  }
+
+  logout() {
+    this.storage.clear();
+    this.goToPage('Login');
   }
 
 }

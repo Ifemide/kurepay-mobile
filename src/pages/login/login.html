@@ -18,8 +18,14 @@
         </div>
         <div *ngIf="!notify" class="submit-form">
           <div>
-            <button>Login</button>
+            <button *ngIf="!loading">Login</button>
+            <div *ngIf="loading" class="button">
+              <img src="../../assets/icon/button-loader.gif" alt="">
+            </div>
           </div>
+        </div>
+        <div (click)="goToPage('Signup')" class="sub-button">
+          <p>Signup</p>
         </div>
         <div *ngIf="notify" class="error-box">
           <p>{{ notifyText ? notifyText : 'Error!' }}</p>
@@ -29,11 +35,7 @@
     </form>
   </div>
 
-  <div (click)="goToPage('Signup')" class="sub-button">
-    <p>Signup</p>
-  </div>
-
   <p class="trade-mark">KurePay™</p>
-
-
 </div>
+
+<popup *ngIf="popup" (click)="exitPopup()" [popup]="popupText"></popup>

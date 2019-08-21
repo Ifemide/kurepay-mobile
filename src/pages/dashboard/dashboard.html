@@ -1,12 +1,9 @@
 <div class="dashboard">
     <div class="head">
         <div class="background">
-            <div class="currency">
-                <currency></currency>
-            </div>
             <div class="balance">
                 <p>Account Balance</p>
-                <h4>{{ localCurrency }} 48,888.00</h4>
+                <h4>{{ localCurrency }} {{ balance | number:'0.2' }}</h4>
             </div>
             <div class="transactions">
                 <p><span>75 </span> Transactions in the last 7 days <a> View All</a></p>
@@ -68,6 +65,6 @@
     </div>
 </div>
 
-<loader *ngIf="loader"></loader>
+<popup *ngIf="popup" (click)="exitPopup()" [popup]="popupText"></popup>
 
 <menu [activeMenu]="activeMenu"></menu>

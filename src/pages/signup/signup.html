@@ -26,7 +26,7 @@
             <input type="password" name="password" [(ngModel)]="password" placeholder="Enter Password" value="">
           </div>
           <div class="text-input">
-            <input type="password" name="password2" [(ngModel)]="password2" placeholder="Re-enter Password" value="">
+            <input type="password" name="password2" [(ngModel)]="password2" placeholder="Confirm Password" value="">
           </div>
         </div>
         <div *ngIf="!notify" class="submit-form">
@@ -38,12 +38,11 @@
           <p>{{ notifyText ? notifyText : 'Error!' }}</p>
           <i class="material-icons" (click)="closeNotify()">cancel</i>
         </div>
+        <div (click)="goToPage('Login')" class="sub-button">
+          <p>Login</p>
+        </div>
       </div>
     </form>
-  </div>
-
-  <div (click)="goToPage('Login')" class="sub-button">
-    <p>Login</p>
   </div>
 
 </div>

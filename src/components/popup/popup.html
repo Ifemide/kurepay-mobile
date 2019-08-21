@@ -1,0 +1,15 @@
+<!-- Generated template for the LoaderComponent component -->
+<div class="container">
+  <div class="content">
+    <!-- <img src="../../assets/icon/logo-motion.gif" alt="Loading gif when awaiting results"> -->
+    <div class="icons">
+      <i style="color:green !important" *ngIf="popup.type === 'success'" class="material-icons">check_circle</i>
+      <i style="color:#DD2626 !important" *ngIf="popup.type === 'failure'" class="material-icons">cancel</i>
+      <i style="color:#FC5D00 !important" *ngIf="popup.type === 'info'" class="material-icons">info</i>
+    </div>
+    <p class="display-text">{{ popup.text }}</p>
+    <div class="popup-button">
+      <button>Close</button>
+    </div>
+  </div>
+</div>

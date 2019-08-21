@@ -2,10 +2,7 @@
     <div class="header">
         <p>Pay Bills</p>
         <div class="user-details">
-            <p>{{ localCurrency }} 48,888.00</p>
-            <div class="currency">
-                <currency></currency>
-            </div>
+            <p>{{ localCurrency }} {{ balance | number:'0.2' }}</p>
         </div>
     </div>
 
@@ -17,43 +14,49 @@
     </div>
 
     <div class="box" *ngIf="viewBox === 'cable'">
-        <form #cableForm="ngForm" (ngSubmit)="onSubmit(cableForm.value)">
+        <form #cableForm="ngForm" (ngSubmit)="cablePayment(cableForm)">
             <div class="kure-form">
                 <div class="form-inputs">
                     <div class="select-input">
                         <label>Cable TV Package</label>
                         <div>
-                            <select value="" name="cable_package" [(ngModel)]="cable_package">
+                            <select (change)="updatePackage(cable_package)" name="cable_package"
+                                [(ngModel)]="cable_package">
                                 <option [ngValue]="undefined">Choose Package</option>
-                                <option *ngFor="let package of packages" [ngValue]="package.code">{{ package.name }}
+                                <option *ngFor="let tv of tvOptions" [ngValue]="tv.id">{{ tv.name }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="select-input">
+                        <label>Cable TV Bouquet</label>
+                        <div>
+                            <select (change)="updateBouquet(cable_bouquet)" name="cable_bouquet"
+                                [(ngModel)]="cable_bouquet">
+                                <option [ngValue]="undefined">Choose Bouquet</option>
+                                <option *ngFor="let bouquet of bouquets" [ngValue]="bouquet.bundleCode">
+                                    {{ bouquet.name }} - N{{ bouquet.amount }}
                                 </option>
                             </select>
                         </div>
                     </div>
                     <div class="text-input">
-                        <div class="label-options">
-                            <label><i class="material-icons">radio_button_checked</i>Smartard Number</label>
-                            <label class="gray"><i class="material-icons">radio_button_unchecked</i>Choose from
-                                beneficiaries</label>
-                        </div>
+                        <label>Smartcard Number</label>
                         <input type="number" [(ngModel)]="card_number" name="card_number"
                             placeholder="Enter Smart Card Number">
-                        <label class="below-input"><i class="material-icons">add_circle</i>Save Beneficiary</label>
                     </div>
-                    <div class="select-input">
-                        <label>Cable TV Bouquet</label>
-                        <div>
-                            <select value="" name="cable_bouquet" [(ngModel)]="cable_bouquet">
-                                <option [ngValue]="undefined">Choose Bouquet</option>
-                                <option *ngFor="let bouquet of bouquets" [ngValue]="bouquet.code">{{ bouquet.name }}
-                                </option>
-                            </select>
-                        </div>
+                    <div class="text-input">
+                        <label>Phone Number</label>
+                        <input type="text" [(ngModel)]="phone_number" name="phone_number"
+                            placeholder="Enter Phone Number">
                     </div>
                 </div>
                 <div class="submit-form">
                     <div>
-                        <button>Pay Bill</button>
+                        <button *ngIf="!loading">Pay Bill</button>
+                        <div *ngIf="loading" class="button">
+                            <img class="center" src="../../assets/icon/button-loader.gif" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,15 +64,15 @@
     </div>
 
     <div class="box" *ngIf="viewBox === 'power'">
-        <form #powerForm="ngForm" (ngSubmit)="onSubmit(powerForm.value)">
+        <form #powerForm="ngForm" (ngSubmit)="powerPayment(powerForm)">
             <div class="kure-form">
                 <div class="form-inputs">
                     <div class="select-input">
                         <label>Electricity Provider</label>
                         <div>
-                            <select value="" name="data_provider" [(ngModel)]="data_provider">
+                            <select value="" name="power_provider" [(ngModel)]="power_provider">
                                 <option [ngValue]="undefined">Choose Provider</option>
-                                <option *ngFor="let provider of providers" [ngValue]="provider.code">{{ provider.name }}
+                                <option *ngFor="let power of powerOptions" [ngValue]="power.id">{{ power.name }}
                                 </option>
                             </select>
                         </div>
@@ -81,9 +84,14 @@
                     </div>
                     <div class="text-input">
                         <label>Amount (NGN)</label>
-                        <input type="number" [(ngModel)]="amount" name="amount" placeholder="Enter Meter Number">
+                        <input type="number" [(ngModel)]="amount" name="amount" placeholder="Enter Amount">
                     </div>
-                    <div class="select-input">
+                    <div class="text-input">
+                        <label>Phone Number</label>
+                        <input type="text" [(ngModel)]="phone_number" name="phone_number"
+                            placeholder="Enter Phone Number">
+                    </div>
+                    <!-- <div class="select-input">
                         <label>Meter Type</label>
                         <div>
                             <select value="" name="data_plan" [(ngModel)]="data_plan">
@@ -91,11 +99,14 @@
                                 <option *ngFor="let meter of meters" [ngValue]="meter.code">{{ meter.name }}</option>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="submit-form">
                     <div>
-                        <button>Pay Bill</button>
+                        <button *ngIf="!loading">Pay Bill</button>
+                        <div *ngIf="loading" class="button">
+                            <img class="center" src="../../assets/icon/button-loader.gif" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,6 +114,6 @@
     </div>
 </div>
 
-<loader *ngIf="loader"></loader>
+<popup *ngIf="popup" (click)="exitPopup()" [popup]="popupText"></popup>
 
 <menu [activeMenu]="activeMenu"></menu>

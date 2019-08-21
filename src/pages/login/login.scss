@@ -1,4 +1,8 @@
 page-login {
+    .login {
+        height: 100%;
+    }
+
     .top-box {
         height: 200px;
         background: url('../../assets/imgs/login-img.png');
@@ -22,6 +26,8 @@ page-login {
     .form-box {
         margin-top: 30px;
         padding: 0px 30px;
+        height: calc(100% - 200px);
+        overflow-y: scroll;
     }
 
     .form-inputs {
@@ -34,15 +40,27 @@ page-login {
 
     .form-inputs .text-input input {
         height: 40px;
-        color: #959595;
-        font-size: 12px;
+        color: #5D5D5D;
+        font-size: 13px;
         border-radius: 4px;
     }
 
-    button {
+    .form-inputs .text-input input:focus {
+        border: 0.5px solid rgba(0,101,119,0.5)
+    }
+
+    button, .button {
         width: 100%;
         border-radius: 4px;
         height: 40px;
+    }
+
+    .submit-form div .button {
+        margin-bottom: 0px !important;
+    }
+
+    .sub-button {
+        margin-bottom: 30px;
     }
 
     .sub-button p {
@@ -77,6 +95,7 @@ page-login {
         padding: 10px 20px;
         border-radius: 5px;
         margin-bottom: 15px;
+        min-height: 40px;
     }
 
     .error-box p {
