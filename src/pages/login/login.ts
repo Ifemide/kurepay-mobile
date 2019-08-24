@@ -45,7 +45,7 @@ export class LoginPage {
         this.storage.set('first_name', res.firstname);
         this.storage.set('last_name', res.lastname);
         this.storage.set('balance', res.balance);
-        this.goToPage('Fund');
+        this.goToPage('Dashboard');
       }
     }, err => {
       this.loading = false;

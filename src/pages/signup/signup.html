@@ -1,5 +1,5 @@
 <div class="signup">
-  <div class="top-box">
+  <!-- <div class="top-box">
     <div class="overlay">
       <img src="../../assets/imgs/kp-logo-full.png" alt="">
     </div>
@@ -42,7 +42,31 @@
           <p>Login</p>
         </div>
       </div>
-    </form>
-  </div>
+    </form> -->
+  <!-- </div> -->
 
+  <div class="background">
+    <div class="container">
+      <div class="content">
+        <img src="../../assets/imgs/kp-logo-full.png" alt="">
+        <form (ngSubmit)="signupUser(signup)" #signup="ngForm">
+          <input type="text" name="first_name" [(ngModel)]="first_name" placeholder="Enter First Name" value="">
+          <input type="text" name="last_name" [(ngModel)]="last_name" placeholder="Enter Last Name" value="">
+          <input type="number" name="phone_number" [(ngModel)]="phone_number" placeholder="Enter Phone Number" value="">
+          <input type="email" name="email_address" [(ngModel)]="email_address" placeholder="Enter Email" value="">
+          <input type="password" name="password" [(ngModel)]="password" placeholder="Enter Password" value="">
+          <input type="password" name="password2" [(ngModel)]="password2" placeholder="Confirm Password" value="">
+          <div>
+            <button *ngIf="!loading">Signup</button>
+            <div *ngIf="loading" class="load-button">
+              <img src="../../assets/icon/button-loader.gif" alt="">
+            </div>
+          </div>
+          <div class="sub-button">
+            <p>Already have an account? <span (click)="goToPage('Login')">Login</span></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

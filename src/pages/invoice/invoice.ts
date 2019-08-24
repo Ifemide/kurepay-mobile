@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { Storage } from '@ionic/storage';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { ApiProvider } from '../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -32,12 +34,12 @@ export class InvoicePage {
     type: '',
     text: ''
   };
-  items = [];
   counter = 0;
-
+  invoiceForm: FormGroup;
+  items: FormArray;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private _data: DataProvider,
-    private storage: Storage) {
+    private storage: Storage, private fb: FormBuilder, private api: ApiProvider) {
     this._data.choiceCurrency.subscribe(res => {
       this.localCurrency = res;
     });
@@ -46,6 +48,12 @@ export class InvoicePage {
   ngOnInit() {
     this.storage.get('balance').then(value => {
       this.balance = Number(value);
+    });
+    this.invoiceForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      date: ['', Validators.required],
+      items: this.fb.array([this.createItem()])
     });
   }
 
@@ -59,33 +67,61 @@ export class InvoicePage {
 
   createInvoice(val) {
     console.log(val.value);
+    // val.value.map(key => {
+    //   console.log(key);
+    // });
+    let titles = [];
+    let descriptions = [];
+    let amounts = [];
+    let quantities = [];
+    // console.log(this.invoiceForm.value.items);
+    for (let i = 0; i < val.value.items.length; i++) {
+      titles.push(val.value.items[i].title);
+      descriptions.push(val.value.items[i].description);
+      amounts.push(String(val.value.items[i].cost));
+      quantities.push(String(val.value.items[i].quantity));
+    }
+    const data = {
+      receiver_mail: val.value.email,
+      due_date: val.value.date,
+      receiver_name: val.value.name,
+      titles: titles,
+      descriptions: descriptions,
+      amounts: amounts,
+      quantities: quantities
+    }
+
+    console.log(data);
+    this.api.newInvoice(data).subscribe((res: any) => {
+      console.log(res);
+      if (res.status === true) {
+        this.showPopup('success', res.message);
+      } else {
+        this.showPopup('failure', res.message);
+      }
+    }, err => {
+      if (err.error.status === true || err.error.status === false) {
+        this.showPopup('failure', err.error.message);
+      }
+    });
   }
 
-  newItem() {
-    // console.log('do something');
-    // const yo = new Date();
-    // console.log(yo);
-    // this.items.push(`<input type="text" placeholder="hi">`);
-    // console.log(this.items);
-    document.getElementsByClassName('kure-form2')[0].innerHTML += `<div class="form-inputs">
-          <div class="text-input">
-            <label>Item Title</label>
-            <input type="text" name="item_title${this.counter}" [(ngModel)]="item_title${this.counter}" placeholder="Enter title">
-          </div>
-          <div class="text-input">
-            <label>Item Description</label>
-            <input type="text" name="item_desc${this.counter}" [(ngModel)]="item_desc${this.counter}" placeholder="Enter item's short description">
-          </div>
-          <div class="text-input">
-            <label>Item Cost ({{ localCurrency }})</label>
-            <input type="number" name="item_cost${this.counter}" [(ngModel)]="item_cost${this.counter}" placeholder="Enter item cost">
-          </div>
-          <div class="text-input">
-            <label>Item Quantity</label>
-            <input type="number" name="item_quantity${this.counter}" [(ngModel)]="item_quantity${this.counter}" placeholder="Enter item quantity">
-          </div>
-        </div>`
-    this.counter++;
+  createItem() {
+    return this.fb.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      cost: ['', Validators.required],
+      quantity: ['', Validators.required]
+    })
+  }
+
+  removeItem() {
+    this.items.removeAt(this.items.controls.length - 1);
+  }
+
+  addItem(): void {
+    this.items = this.invoiceForm.get('items') as FormArray;
+    this.items.push(this.createItem());
   }
 
   showFilter() {

@@ -37,6 +37,10 @@ export class DashboardPage {
     console.log('ionViewDidLoad DashboardPage');
   }
 
+  goToPage(title) {
+    this.navCtrl.setRoot(title + 'Page');
+  }
+
   showPopup(type, text) {
     this.popupText = {
       type: type,

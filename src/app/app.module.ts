@@ -14,6 +14,7 @@ import { InterceptorProvider } from '../providers/interceptor/interceptor';
 
 import { QRCodeModule } from 'angularx-qrcode';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     BrowserModule,
     HttpClientModule,
     QRCodeModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],

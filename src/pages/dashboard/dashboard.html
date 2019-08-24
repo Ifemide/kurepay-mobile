@@ -12,12 +12,12 @@
     </div>
 
     <div class="buttons">
-        <button class="left">
+        <button (click)="goToPage('Fund')" class="left">
             <!-- (click)="openPage()" -->
             <i class="material-icons">add_circle</i>
             Receive Payment
         </button>
-        <button>
+        <button (click)="goToPage('Transfer')">
             <i class="material-icons">cached</i>
             Transfer Money
         </button>

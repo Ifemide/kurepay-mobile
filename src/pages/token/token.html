@@ -1,6 +1,6 @@
 <div class="token">
 
-  <div class="middle">
+  <!-- <div class="middle">
     <div class="form-box">
       <form *ngIf="token" (ngSubmit)="checkToken(token)" #token="ngForm">
         <div class="kure-form">
@@ -38,7 +38,30 @@
       <p>Cancel Verification</p>
     </div>
   </div>
-  <p class="trade-mark">KurePay™</p>
+  <p class="trade-mark">KurePay™</p> -->
 
-
+  <div class="background">
+    <div class="container">
+      <div class="content">
+        <form *ngIf="token" (ngSubmit)="checkToken(token)" #token="ngForm">
+          <input type="text" name="token_code" [(ngModel)]="token_code" placeholder="Enter token sent to your email">
+          <div *ngIf="!notify">
+            <button *ngIf="!loading">Verify Token</button>
+            <div *ngIf="loading" class="load-button">
+              <img src="../../assets/icon/button-loader.gif" alt="">
+            </div>
+          </div>
+          <div (click)="goToPage('Login')" class="sub-button">
+            <p><span>Cancel Verification</span></p>
+          </div>
+        </form>
+        <form *ngIf="!token">
+          <div (click)="sendToken()">
+            <button>Resend Token</button>
+            <p style="text-align: center">{{ notifyText }}</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
