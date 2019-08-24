@@ -7,12 +7,14 @@ export class ApiProvider {
   private url: any;
   private utilityJSON: any;
   private banksJSON: any;
+  private currencyJSON: any;
 
   constructor(public _http: HttpClient) {
     // console.log('Hello ApiProvider Provider');
     this.url = 'https://kurepay.herokuapp.com/api/';
     this.utilityJSON = 'assets/utility.json';
     this.banksJSON = 'assets/banks.json';
+    this.currencyJSON = 'assets/currency.json';
   }
 
   jsonData() {
@@ -21,6 +23,10 @@ export class ApiProvider {
 
   bankDataJSON() {
     return this._http.get(this.banksJSON);
+  }
+
+  changeCurrencyJSON() {
+    return this._http.get(this.currencyJSON);
   }
 
   login(data) {

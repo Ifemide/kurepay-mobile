@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 import { Storage } from '@ionic/storage';
+import { DataProvider } from '../../providers/data/data';
 
 @IonicPage()
 @Component({
@@ -20,7 +21,7 @@ export class LoginPage {
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public _api: ApiProvider, private storage: Storage) {
+    public _api: ApiProvider, private storage: Storage, private _data: DataProvider) {
   }
 
   ionViewDidLoad() {
@@ -38,6 +39,7 @@ export class LoginPage {
       if (res.token) {
         data.reset();
         this.loading = false;
+        this._data.changeCurrency('USD');
         this.storage.set('auth_token', res.token);
         this.storage.set('email', res.email);
         this.storage.set('first_name', res.firstname);

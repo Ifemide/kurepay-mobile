@@ -14,9 +14,13 @@
   </div>
 
   <div class="box" *ngIf="viewBox === 'create'">
-    <form #createInvoice="ngForm" (ngSubmit)="onSubmit(createInvoice.value)">
+    <form #invoiceForm="ngForm" (ngSubmit)="createInvoice(invoiceForm)">
       <div class="kure-form">
         <div class="form-inputs">
+          <div class="text-input">
+            <label>Receiver Name</label>
+            <input type="text" name="receiver_name" [(ngModel)]="receiver_name" placeholder="Enter Name of Reciever">
+          </div>
           <div class="text-input">
             <label>Receiver Email</label>
             <input type="text" name="receiver_email" [(ngModel)]="receiver_email" placeholder="Enter Email of Reciever">
@@ -26,19 +30,26 @@
             <input type="date" name="due_date" [(ngModel)]="due_date" placeholder="Choose Due Date">
           </div>
         </div>
+        <div class="kure-form2"></div>
         <div class="kure-form-control">
-          <p class="add-to-form" (click)="doSomething()">
+          <p class="add-to-form" (click)="newItem()">
             <i class="material-icons">add_circle</i>
-            <span>Add Outline Item</span>
+            <span>Add Invoice Item</span>
           </p>
         </div>
-        <div class="submit-form">
+        <div *ngIf="counter > 0" class="submit-form">
           <div>
             <button>Send Invoice</button>
           </div>
         </div>
       </div>
     </form>
+    <template>
+      <h1 [ngStyle]="{background: 'green'}">Test</h1>
+      <p *ngIf="bla">Im not visible</p>
+    </template>
+    <!-- <template ngTemplateOutlet></template> -->
+    <!-- <template [ngTemplateOutlet]="temp"></template> -->
   </div>
 
   <div class="box" *ngIf="viewBox === 'invoices'">

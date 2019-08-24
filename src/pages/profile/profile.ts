@@ -26,6 +26,9 @@ export class ProfilePage {
   };
   otp = false;
   refCode: any;
+  selectCode = false;
+  choiceCurrency: string;
+  countries: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private _data: DataProvider,
     public storage: Storage, private api: ApiProvider) {
@@ -47,6 +50,23 @@ export class ProfilePage {
     this.storage.get('balance').then(value => {
       this.balance = value;
     });
+    this.api.changeCurrencyJSON().subscribe(res => {
+      console.log(res);
+      this.countries = res;
+    });
+    this._data.choiceCurrency.subscribe(res => {
+      this.choiceCurrency = res;
+    });
+  }
+
+  chooseCountry(val) {
+    console.log(val.currency_code);
+    this._data.changeCurrency(val.currency_code);
+    this.showCountries();
+  }
+
+  showCountries() {
+    this.selectCode = !this.selectCode;
   }
 
   ionViewDidLoad() {

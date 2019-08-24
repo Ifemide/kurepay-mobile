@@ -3,6 +3,17 @@
         <p>Profile</p>
         <div class="user-details">
             <p>{{ localCurrency }} {{ balance | number:'0.2' }}</p>
+            <div class="currency">
+                <p (click)="showCountries()" class="current">{{ choiceCurrency }} <i
+                        class="material-icons">arrow_drop_down</i></p>
+                <div (click)="showCountries()" *ngIf="selectCode">
+                    <div class="selectOverlay">
+                        <div *ngFor="let country of countries">
+                            <p (click)="chooseCountry(country)">{{country.country}} ({{country.currency_code}})</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -36,6 +47,7 @@
                             placeholder="Enter Email Address">
                     </div>
                 </div>
+                <!-- <currency></currency> -->
                 <!-- <div class="submit-form">
                     <div>
                         <button>Update Profile</button>
@@ -43,6 +55,17 @@
                 </div> -->
             </div>
         </form>
+        <!-- <div class="currency">
+            <p (click)="showCountries()" class="current">{{ choiceCurrency }} <i
+                    class="material-icons">arrow_drop_down</i></p>
+            <div (click)="showCountries()" *ngIf="selectCode">
+                <div class="selectOverlay">
+                    <div *ngFor="let country of countries">
+                        <p (click)="chooseCountry(country)">{{country.country}} ({{country.currency_code}})</p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
     </div>
 
     <div class="box" *ngIf="viewBox === 'password'">

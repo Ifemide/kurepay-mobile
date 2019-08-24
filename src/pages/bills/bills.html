@@ -13,6 +13,9 @@
         </div>
     </div>
 
+    <!-- <p class="tab-menu-info" *ngIf="viewBox === 'power'">PREPAID meters will require a token which will be sent to your
+    email</p> -->
+
     <div class="box" *ngIf="viewBox === 'cable'">
         <form #cableForm="ngForm" (ngSubmit)="cablePayment(cableForm)">
             <div class="kure-form">

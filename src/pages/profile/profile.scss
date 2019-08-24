@@ -1,3 +1,52 @@
 page-profile {
+    .currency {
+        // position: relative;
+        color: #424242;
+    }
 
+    .currency .current {
+        font-size: 10px;
+        text-transform: uppercase;
+        // display: flex;
+        // align-items: center;
+        // justify-content: flex-end;
+        margin-top: -2.5px;
+        color: #FFFFFF;
+    }
+
+    .currency .current i {
+        font-size: 18px;
+    }
+
+    .currency > div {
+        z-index: 99999999999;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 100vh;
+        width: 100%;
+        background-color: rgba(0,0,0,0.32);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .currency > div .selectOverlay {
+        background-color: #FFFFFF;
+        font-size: 12px;
+        height: 400px;
+        width: 200px;
+        border-radius: 4px;
+        overflow-y: scroll;
+    }
+
+    .currency > div .selectOverlay div {
+        padding: 10px 16px;
+        border-bottom: 0.5px solid #CBCBCB;
+        text-align: center;
+    }
+
+    .currency > div .selectOverlay div:last-child {
+        border-bottom: none;
+    }
 }
