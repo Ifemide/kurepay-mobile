@@ -22,12 +22,13 @@ export class FundPage {
   loading = false;
   activeMenu = 'Fund';
   cryptos = [
-    { code: 'BTC', name: 'Bitcoin (BTC)' },
-    { code: 'ETH', name: 'Ethereum (ETH)' },
-    { code: 'DASH', name: 'Dash (DSH)' }
+    { id: 0, code: 'BTC', name: 'Bitcoin' },
+    { id: 1, code: 'ETH', name: 'Ethereum' },
+    { id: 2, code: 'DASH', name: 'Dash' }
   ];
   qrdata: string;
   // qrdata = 'coin message';
+  coinName = 'bitcoin';
   popup = false;
   popupText = {
     type: '',
@@ -69,13 +70,12 @@ export class FundPage {
   //   }
   // }
 
-  getAddresses(data) {
+  getAddresses(id) {
     this.loading = true;
     this.viewAddress = false;
-    console.log(data);
     let formData = {
-      "coin_type": data.crypto_currency,
-      "coin_name": "bitcoin"
+      "coin_type": this.cryptos[id.crypto_currency].code,
+      "coin_name": this.cryptos[id.crypto_currency].name.toLowerCase()
     }
 
     this._api.generateAddresses(formData).subscribe((res: any) => {

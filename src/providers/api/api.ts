@@ -58,7 +58,7 @@ export class ApiProvider {
   }
 
   generateAddresses(data) {
-    return this._http.post(this.url + 'fundwallet/generateAddress', data);
+    return this._http.post(this.url + 'fundwallet/address', data);
   }
 
   fundWithCard(data) {
@@ -110,7 +110,7 @@ export class ApiProvider {
   }
 
   allTransactions() {
-    return this._http.get(this.url + 'transactions');
+    return this._http.get(`${this.url}transactions?page=${1}&limit=${20}`);
   }
 
   newInvoice(data) {

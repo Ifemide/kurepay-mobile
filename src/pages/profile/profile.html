@@ -29,22 +29,28 @@
 
     <div class="box" *ngIf="viewBox === 'profile'">
         <form #updateProfile="ngForm" (ngSubmit)="onSubmit(updateProfile)">
-            <div class="kure-form">
+            <div *ngIf="!lastName" class="button">
+                <img class="center" src="../../assets/icon/button-loader.gif" alt="">
+            </div>
+            <div *ngIf="lastName" class="kure-form">
                 <div class="form-inputs">
-                    <div class="text-input" (click)="onSubmit(updateProfile)">
+                    <div class="text-input side-text" (click)="onSubmit(updateProfile)">
                         <label>First Name</label>
-                        <input type="text" disabled aria-disabled="true" name="first_name" [(ngModel)]="firstName"
-                            placeholder="Enter First Name">
+                        <p class="profile-details">{{ firstName }}</p>
+                        <!-- <input type="text" disabled aria-disabled="true" name="first_name" [(ngModel)]="firstName"
+                            placeholder="Enter First Name"> -->
                     </div>
-                    <div class="text-input" (click)="onSubmit(updateProfile)">
+                    <div class="text-input side-text" (click)="onSubmit(updateProfile)">
                         <label>Last Name</label>
-                        <input type="text" disabled aria-disabled="true" name="last_name" [(ngModel)]="lastName"
-                            placeholder="Enter Last Name">
+                        <p class="profile-details">{{ lastName }}</p>
+                        <!-- <input type="text" disabled aria-disabled="true" name="last_name" [(ngModel)]="lastName"
+                            placeholder="Enter Last Name"> -->
                     </div>
-                    <div class="text-input" (click)="onSubmit(updateProfile)">
+                    <div class="text-input side-text" (click)="onSubmit(updateProfile)">
                         <label>Email Address</label>
-                        <input type="email" disabled aria-disabled="true" name="email_address" [(ngModel)]="email"
-                            placeholder="Enter Email Address">
+                        <p class="profile-details">{{ email }}</p>
+                        <!-- <input type="email" disabled aria-disabled="true" name="email_address" [(ngModel)]="email"
+                            placeholder="Enter Email Address"> -->
                     </div>
                 </div>
                 <!-- <currency></currency> -->
@@ -104,8 +110,8 @@
             <div class="kure-form">
                 <div class="form-inputs">
                     <div class="text-input">
-                        <label>Bank Verification Number (BVN)</label>
-                        <input type="text" name="bvn" [(ngModel)]="bvn" placeholder="Enter Your BVN">
+                        <label>Idenification Number</label>
+                        <input type="text" name="bvn" [(ngModel)]="bvn" placeholder="Enter Your BVN OR NIN">
                     </div>
                     <div class="text-input" *ngIf="otp">
                         <label>Phone Number</label>

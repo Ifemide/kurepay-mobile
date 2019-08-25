@@ -28,7 +28,7 @@
                             <select (change)="getAddresses(viaCrypto.value)" name="crypto_currency" value="0"
                                 [(ngModel)]="crypto_currency">
                                 <option [ngValue]="undefined">Choose Cryptocurrency</option>
-                                <option *ngFor="let crypto of cryptos" [ngValue]="crypto.code">{{ crypto.name }}
+                                <option *ngFor="let crypto of cryptos" [ngValue]="crypto.id">{{ crypto.name }}
                                 </option>
                             </select>
                         </div>

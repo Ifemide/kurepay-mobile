@@ -45,6 +45,11 @@ export class TransactionsPage {
         this.loading = false;
         this.showPopup('failure', res.message);
       }
+    }, err => {
+      if (err.error.status === false) {
+        this.loading = false;
+        this.showPopup('failure', err.error.message);
+      }
     });
   }
 
