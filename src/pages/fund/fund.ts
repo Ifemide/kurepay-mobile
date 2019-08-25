@@ -4,6 +4,7 @@ import { CurrencyComponent } from '../../components/currency/currency';
 import { DataProvider } from '../../providers/data/data';
 import { ApiProvider } from '../../providers/api/api';
 import { Storage } from '@ionic/storage';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 
@@ -37,7 +38,7 @@ export class FundPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private _data: DataProvider, private _api: ApiProvider, private storage: Storage,
-    private iab: InAppBrowser) {
+    private iab: InAppBrowser, private clipboard: Clipboard) {
     this._data.choiceCurrency.subscribe(res => {
       this.localCurrency = res;
     });
@@ -138,6 +139,10 @@ export class FundPage {
 
   exitPopup() {
     this.popup = false;
+  }
+
+  copyAddress() {
+    this.clipboard.copy(this.qrdata);
   }
 
 }

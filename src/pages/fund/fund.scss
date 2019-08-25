@@ -25,4 +25,18 @@ page-fund {
         font-weight: 500;
         color: #006577;
     }
+
+    .text-input-icon .display {
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+    }
+
+    .text-input-icon .copy {
+        padding: 4px;
+        font-size: 18px;
+        padding-top: 2px;
+        color: #006577;
+        font-weight: 400;
+    }
 }

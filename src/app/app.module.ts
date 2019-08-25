@@ -15,6 +15,7 @@ import { InterceptorProvider } from '../providers/interceptor/interceptor';
 import { QRCodeModule } from 'angularx-qrcode';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   providers: [
     StatusBar,
     SplashScreen,
+    Clipboard,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataProvider,
     ApiProvider,

@@ -38,7 +38,8 @@
                     </div>
                     <div *ngIf="viewAddress" class="text-input-icon">
                         <label>Address</label>
-                        <p class="display">{{ qrdata }}</p>
+                        <p class="display">{{ qrdata }} <i (click)="copyAddress()"
+                                class="material-icons copy">filter_none</i></p>
                         <!-- <div>
                             <input type="text" #address disabled aria-disabled="true" [value]="qrdata">
                             <i (click)="copyAddress(address.value)" class="material-icons colored">filter_none</i>
