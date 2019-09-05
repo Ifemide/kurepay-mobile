@@ -72,7 +72,7 @@ page-login {
     }
 
     form > div {
-        margin-top: 30px;
+        margin-top: 10px;
         text-align: center;
     }
 
@@ -87,11 +87,28 @@ page-login {
         color: #006577;
     }
 
+    // .sub-button {
+    //     display: flex;
+    //     justify-content: space-between;
+    //     align-items: center;
+    // }
+
     .sub-button p {
         font-size: 12px;
         color: rgba(255,255,255,0.4);
         font-weight: normal;
     }
+
+    .forgot-password p {
+        font-size: 12px;
+        color: rgba(255,255,255,0.75);
+        font-weight: normal;
+        padding: 2.5px 0px;
+    }
+
+    // .sub-button p:first-child {
+    //     text-transform: uppercase;
+    // }
 
     .sub-button p span {
         text-transform: uppercase;
@@ -110,6 +127,7 @@ page-login {
 
     .load-button img {
         width: 40px;
+        margin-top: 20px;
     }
 
     // .login {
@@ -200,27 +218,27 @@ page-login {
     //     margin-bottom: 20px;
     // }
 
-    // .error-box {
-    //     background-color: #DD2626;
-    //     display: flex;
-    //     justify-content: space-between;
-    //     align-items: center;
-    //     padding: 10px 20px;
-    //     border-radius: 5px;
-    //     margin-bottom: 15px;
-    //     min-height: 40px;
-    // }
+    .error-box {
+        background-color: #DD2626;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        min-height: 40px;
+    }
 
-    // .error-box p {
-    //     color: #FFFFFF;
-    //     margin-bottom: 0px;
-    //     margin-right: 10px;
-    //     font-weight: 100;
-    //     line-height: 1.25;
-    // }
+    .error-box p {
+        color: #FFFFFF;
+        margin-bottom: 0px;
+        margin-right: 10px;
+        font-weight: 100;
+        line-height: 1.25;
+    }
 
-    // .error-box i {
-    //     font-size: 18px;
-    //     color: rgba(245, 245, 245, 0.75);
-    // }
+    .error-box i {
+        font-size: 18px;
+        color: rgba(245, 245, 245, 0.75);
+    }
 }

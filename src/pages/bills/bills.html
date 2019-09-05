@@ -71,6 +71,16 @@
             <div class="kure-form">
                 <div class="form-inputs">
                     <div class="select-input">
+                        <label>Meter Type</label>
+                        <div>
+                            <select (change)="chooseMeterType(meter_type)" name="meter_type" [(ngModel)]="meter_type">
+                                <option [ngValue]="undefined">Choose Meter Type</option>
+                                <option value="prepaid">PrePaid</option>
+                                <option value="postpaid">PostPaid</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="select-input">
                         <label>Electricity Provider</label>
                         <div>
                             <select value="" name="power_provider" [(ngModel)]="power_provider">
@@ -89,10 +99,10 @@
                         <label>Amount (NGN)</label>
                         <input type="number" [(ngModel)]="amount" name="amount" placeholder="Enter Amount">
                     </div>
-                    <div class="text-input">
-                        <label>Phone Number</label>
-                        <input type="text" [(ngModel)]="phone_number" name="phone_number"
-                            placeholder="Enter Phone Number">
+                    <div *ngIf="meter_type === 'prepaid'" class="text-input">
+                        <label>Email Address</label>
+                        <input type="text" [(ngModel)]="email_address" name="email_address"
+                            placeholder="Enter Email Address">
                     </div>
                     <!-- <div class="select-input">
                         <label>Meter Type</label>

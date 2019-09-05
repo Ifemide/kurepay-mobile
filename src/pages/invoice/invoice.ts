@@ -85,6 +85,7 @@ export class InvoicePage {
       receiver_mail: val.value.email,
       due_date: val.value.date,
       receiver_name: val.value.name,
+      // items: val.value.items
       titles: titles,
       descriptions: descriptions,
       amounts: amounts,

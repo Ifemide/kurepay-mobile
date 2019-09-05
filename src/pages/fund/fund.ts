@@ -4,7 +4,7 @@ import { CurrencyComponent } from '../../components/currency/currency';
 import { DataProvider } from '../../providers/data/data';
 import { ApiProvider } from '../../providers/api/api';
 import { Storage } from '@ionic/storage';
-import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { Clipboard } from '@ionic-native/clipboard';
 
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 
@@ -59,18 +59,6 @@ export class FundPage {
     this.loading = false;
   }
 
-  // onSubmit(value) {
-  //   if (value !== '') {
-  //     console.log(value);
-  //     if (value.crypto_currency) {
-  //       this.viewAddress = value.crypto_currency;
-  //       console.log(this.viewAddress);
-  //     } else if (value.fund_amount) {
-  //       // call another function to trigger the link to payment gateway
-  //     }
-  //   }
-  // }
-
   getAddresses(id) {
     this.loading = true;
     this.viewAddress = false;
@@ -115,7 +103,7 @@ export class FundPage {
           useWideViewPort: 'no'
         }
         if (payload.status === true) {
-          this.iab.create(`${payload.paymenturl}`, '_self', options);
+          this.iab.create(`${payload.data.paymenturl}`, '_self', options);
         } else if (payload.status === false) {
           this.showPopup('failure', payload.message);
         }
@@ -123,7 +111,7 @@ export class FundPage {
         // cordova.InAppBrowser.open(payload.paymenturl, target, options);
       }, err => {
         console.log(err);
-        this.loading = true;
+        this.loading = false;
         this.showPopup('failure', err.error.message);
       });
     }
@@ -142,7 +130,11 @@ export class FundPage {
   }
 
   copyAddress() {
-    this.clipboard.copy(this.qrdata);
+    this.clipboard.copy(this.qrdata).then(() => this.showPopup('success', 'Wallet address copied!'));
+  }
+
+  copyAccountNumber(num) {
+    this.clipboard.copy(num).then(() => this.showPopup('success', 'Account number copied!'));
   }
 
 }

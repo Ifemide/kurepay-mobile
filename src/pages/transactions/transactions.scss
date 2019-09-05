@@ -92,4 +92,12 @@ page-transactions {
         color: #65A558;
     }
 
+    p.no-transactions {
+        text-align: center;
+        color: lighten(#424242, 25%);
+    }
+
+    p.no-transactions span {
+        font-size: 30px;
+    }
 }

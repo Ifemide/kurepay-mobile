@@ -11,6 +11,7 @@
     <div class="container">
       <div (click)="changeView('sms')" [ngClass]="{'active' : viewBox === 'sms'}">SMS</div>
       <div (click)="changeView('waec')" [ngClass]="{'active' : viewBox === 'waec'}">Waec</div>
+      <div (click)="changeView('betting')" [ngClass]="{'active' : viewBox === 'betting'}">Betting</div>
     </div>
   </div>
 
@@ -77,6 +78,12 @@
         </div>
       </div>
     </form>
+  </div>
+
+  <div class="box" *ngIf="viewBox === 'betting'">
+    <div class="box-details">
+      <p class="upper">Sports Betting Coming Soon..</p>
+    </div>
   </div>
 </div>
 

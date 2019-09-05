@@ -38,15 +38,15 @@ export class TransactionsPage {
       this.balance = value;
     });
     this.api.allTransactions().subscribe((res: any) => {
-      if (res.status === true) {
+      if (res.status) {
         this.loading = false;
         this.transactions = res.data;
-      } else if (res.status === false) {
+      } else if (!res.status) {
         this.loading = false;
         this.showPopup('failure', res.message);
       }
     }, err => {
-      if (err.error.status === false) {
+      if (!err.error.status) {
         this.loading = false;
         this.showPopup('failure', err.error.message);
       }

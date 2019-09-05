@@ -29,6 +29,7 @@ export class ProfilePage {
   selectCode = false;
   choiceCurrency: string;
   countries: any;
+  id_type: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private _data: DataProvider,
     public storage: Storage, private api: ApiProvider) {
@@ -51,7 +52,6 @@ export class ProfilePage {
       this.balance = value;
     });
     this.api.changeCurrencyJSON().subscribe(res => {
-      console.log(res);
       this.countries = res;
     });
     this._data.choiceCurrency.subscribe(res => {
@@ -61,7 +61,19 @@ export class ProfilePage {
 
   chooseCountry(val) {
     console.log(val.currency_code);
-    this._data.changeCurrency(val.currency_code);
+    const data = {
+      currency: val.currency_code
+    }
+    this.api.changeCurrency(data).subscribe((res: any) => {
+      console.log(res);
+      if (res.status === true) {
+        this.showPopup('success', res.message);
+        this._data.changeCurrency(val.currency_code);
+        this.balance = res.balance;
+        this.storage.set('balance', res.balance);
+      }
+    }, err => { if (!err.error.status) this.showPopup('success', err.error.message) });
+
     this.showCountries();
   }
 
@@ -77,50 +89,80 @@ export class ProfilePage {
     this.showPopup('info', 'Please contact the admin to update your profile');
   }
 
-  kyCustomer(bvn) {
+
+  verifyIdentity(bvn) {
     console.log(bvn.value);
     console.log(this.refCode);
-    if (this.refCode === undefined) {
-      this.loading = true;
-      const data = {
-        number: bvn.value.bvn
-      }
+    if (bvn.value.bvn || bvn.value.nin) {
+      if (this.refCode === undefined) {
+        this.loading = true;
+        const data = {
+          number: this.id_type === 'bvn' ? bvn.value.bvn : bvn.value.nin
+        }
 
-      this.api.sendBVN(data).subscribe((res: any) => {
-        this.loading = false;
-        console.log(res);
-        if (res.status === true) {
-          this.showPopup('success', res.message);
-          this.otp = true;
-          this.refCode = res.data.referenceCode;
-        } else if (res.status === false) {
-          this.showPopup('failure', res.message);
+        if (bvn.value.bvn) {
+          this.api.sendBVN(data).subscribe((res: any) => {
+            this.loading = false;
+            console.log(res);
+            if (res.status === true) {
+              if (res.data.referenceCode) {
+                this.refCode = res.data.referenceCode;
+                this.showPopup('success', res.message);
+                this.otp = true;
+              } else {
+                this.showPopup('failure', 'Please enter a valid BVN');
+              }
+            } else if (res.status === false) {
+              this.showPopup('failure', res.message);
+            }
+          }, err => {
+            this.loading = false;
+            if (err.error.status === false) this.showPopup('failure', err.error.message);
+          });
+        } else {
+          this.api.sendNIN(data).subscribe((res: any) => {
+            this.loading = false;
+            console.log(res);
+            if (res.status === true) {
+              if (res.data) {
+                this.refCode = res.data.referenceCode;
+                this.showPopup('success', res.message);
+                this.otp = true;
+              } else {
+                this.showPopup('failure', 'Please enter a valid NIN');
+              }
+            } else if (res.status === false) {
+              this.showPopup('failure', res.message);
+            }
+          }, err => {
+            this.loading = false;
+            if (err.error.status === false) this.showPopup('failure', err.error.message);
+          });
         }
-      }, err => {
-        this.loading = false;
-        if (err.error.status === false) this.showPopup('failure', err.error.message);
-      });
-    } else {
-      this.loading = true;
-      const data = {
-        "number": bvn.value.phone_number,
-        "otp": bvn.value.otp_bvn
+      } else {
+        this.loading = true;
+        const data = {
+          "number": bvn.value.phone_number,
+          "otp": bvn.value.otp_bvn
+        }
+        this.api.verifyBVN(this.refCode, data).subscribe((res: any) => {
+          console.log(res);
+          this.otp = false;
+          this.loading = false;
+          bvn.reset();
+          if (res.status === true) {
+            this.showPopup('success', res.message);
+          } else if (res.status === false) {
+            this.showPopup('failure', res.message);
+          }
+        }, err => {
+          bvn.reset();
+          this.loading = false;
+          if (err.error.status === false) this.showPopup('failure', err.error.message);
+        });
       }
-      this.api.verifyBVN(this.refCode, data).subscribe((res: any) => {
-        console.log(res);
-        this.otp = false;
-        this.loading = false;
-        bvn.reset();
-        if (res.status === true) {
-          this.showPopup('success', res.message);
-        } else if (res.status === false) {
-          this.showPopup('failure', res.message);
-        }
-      }, err => {
-        bvn.reset();
-        this.loading = false;
-        if (err.error.status === false) this.showPopup('failure', err.error.message);
-      });
+    } else {
+      this.showPopup('info', 'Please enter all values to continue!')
     }
   }
 

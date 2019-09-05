@@ -44,35 +44,45 @@ export class RechargePage implements OnInit {
       this.airtimeOptions = res.Airtime;
       this.dataOptions = res.Data;
     });
+    if (this.navParams.data.tab) {
+      this.viewBox = this.navParams.data.tab;
+    }
   }
 
   buyAirtime(val) {
-    this.loading = true;
-    console.log(val.value);
-    const data = {
-      amount: String(val.value.airtime_amount),
-      id: String(val.value.network_provider),
-      phone: String(val.value.phone_number)
+    if (val.value.airtime_amount !== undefined &&
+      val.value.network_provider !== undefined &&
+      val.value.phone_number !== undefined) {
+      this.loading = true;
+      console.log(val.value);
+      const data = {
+        amount: String(val.value.airtime_amount),
+        id: String(val.value.network_provider),
+        phone: String(val.value.phone_number)
+      }
+
+      this.api.buyAirtime(data).subscribe((res: any) => {
+        console.log(res);
+        this.loading = false;
+        val.reset();
+        if (res.status === true) {
+          this.showPopup('success', res.message);
+        } else if (res.status === false) {
+          val.reset();
+          this.showPopup('failure', res.message);
+        }
+      }, err => {
+        console.log(err);
+        this.loading = false;
+        if (err.error.status === false) {
+          val.reset();
+          this.showPopup('failure', err.error.message);
+        }
+      });
+    } else {
+      this.showPopup('info', 'Please enter all values to continue!')
     }
 
-    this.api.buyAirtime(data).subscribe((res: any) => {
-      console.log(res);
-      this.loading = false;
-      val.reset();
-      if (res.status === true) {
-        this.showPopup('success', res.message);
-      } else if (res.status === false) {
-        val.reset();
-        this.showPopup('failure', res.message);
-      }
-    }, err => {
-      console.log(err);
-      this.loading = false;
-      if (err.error.status === false) {
-        val.reset();
-        this.showPopup('failure', err.error.message);
-      }
-    });
   }
 
   buyData(val) {

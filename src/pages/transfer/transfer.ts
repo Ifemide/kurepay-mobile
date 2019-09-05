@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { Storage } from '@ionic/storage';
 import { ApiProvider } from '../../providers/api/api';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 
 @IonicPage()
 @Component({
@@ -35,10 +36,14 @@ export class TransferPage {
     { code: 'BTC', name: 'Bitcoin' },
     { code: 'ETH', name: 'Ethereum' },
     { code: 'DASH', name: 'Dash' }
-  ]
+  ];
+  options: BarcodeScannerOptions = {
+    prompt: 'Place a QR Code inside the viewfinder rectangle to scan it'
+  };
+  wallet_address: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private _data: DataProvider,
-    private storage: Storage, private _api: ApiProvider) {
+    private storage: Storage, private _api: ApiProvider, private barcodeScanner: BarcodeScanner) {
     this._data.choiceCurrency.subscribe(res => {
       this.localCurrency = res;
     });
@@ -50,6 +55,19 @@ export class TransferPage {
     });
     this._api.bankDataJSON().subscribe((res: any) => {
       this.bankList = res;
+    });
+    this._api.authUser().subscribe((res: any) => {
+      this.balance = res.data.balance;
+      this.storage.set('balance', res.data.balance);
+    });
+  }
+
+  scan() {
+    this.barcodeScanner.scan(this.options).then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+      this.wallet_address = barcodeData.text;
+    }).catch(err => {
+      console.log('Error', err);
     });
   }
 
@@ -76,6 +94,8 @@ export class TransferPage {
       if (res.status === true) {
         this.loading = false;
         this.showPopup('success', res.message);
+        this.balance = res.balance;
+        this.storage.set('balance', res.balance);
         val.reset();
         this.otpBank = false;
       } else if (res.status === false) {
@@ -85,8 +105,8 @@ export class TransferPage {
       }
     }, err => {
       this.loading = false;
-      if (err.ok === false) {
-        this.showPopup('failure', err.statusText);
+      if (err.error.status === false) {
+        this.showPopup('failure', err.error.message);
       }
     });
   }
@@ -100,7 +120,8 @@ export class TransferPage {
       }
 
       this._api.getAccountName(data).subscribe((res: any) => {
-        if (res.status === 'success') {
+        console.log(res);
+        if (res.status === true) {
           this.loading = false;
           this.accountName = res.data;
         } else {
@@ -134,6 +155,8 @@ export class TransferPage {
       this.otpCrypto = false;
       if (res.status === true) {
         this.showPopup('success', res.message);
+        this.balance = res.balance;
+        this.storage.set('balance', res.balance);
       } else {
         this.showPopup('failure', res.message);
       }
@@ -141,10 +164,10 @@ export class TransferPage {
       this.loading = false;
       console.log(err.error);
       if (err.error.message) {
-        this.showPopup('failure', err.error.message);
+        this.showPopup('failure', 'Error! Please enter valid data!');
       }
       if (err.message) {
-        this.showPopup('failure', err.message);
+        this.showPopup('failure', 'Error! Please enter valid data!');
       }
     });
   }
@@ -189,27 +212,64 @@ export class TransferPage {
       console.log(load);
       this.payload = load;
       this.otpBank = !this.otpBank;
+    }, err => {
+      this.loading = false;
+      if (!err.error.status) this.showPopup('success', err.error.message)
     });
   }
 
-  showCryptoOTP() {
-    this.loading = true;
-    this._api.generateToken().subscribe(load => {
-      this.loading = false;
-      console.log(load);
-      this.payload = load;
-      this.otpCrypto = !this.otpCrypto;
-    });
+  showCryptoOTP(cryptoForm) {
+    if (cryptoForm.value.crypto_currency !== undefined &&
+      cryptoForm.value.wallet_address !== undefined &&
+      cryptoForm.value.amount_to_transfer !== undefined) {
+      this.loading = true;
+      this._api.generateToken().subscribe(load => {
+        this.loading = false;
+        console.log(load);
+        this.payload = load;
+        this.otpCrypto = !this.otpCrypto;
+      }, err => {
+        this.loading = false;
+        if (err.error.status === false) {
+          this.showPopup('failure', err.error.message);
+        }
+      });
+    } else {
+      this.showPopup('info', 'Please enter all values to continue!')
+    }
   }
 
-  showWalletOTP() {
-    this.loading = true;
-    this._api.generateToken().subscribe(load => {
-      this.loading = false;
-      console.log(load);
-      this.payload = load;
-      this.otpWallet = !this.otpWallet;
-    });
+  showWalletOTP(walletForm) {
+    if (walletForm.value.recipient_email !== undefined &&
+      walletForm.value.amount_to_transfer !== undefined) {
+      this.loading = true;
+      const data = {
+        email: walletForm.value.recipient_email
+      }
+
+      this._api.validEmail(data).subscribe((res: any) => {
+        if (res.status === true) {
+
+          this._api.generateToken().subscribe(load => {
+            this.loading = false;
+            console.log(load);
+            this.payload = load;
+            this.otpWallet = !this.otpWallet;
+          }, err => {
+            this.loading = false;
+            if (!err.error.status) this.showPopup('success', err.error.message)
+          });
+
+        } else if (res.status === false) this.showPopup('info', res.message);
+      }, err => {
+        this.loading = false;
+        console.log(err);
+        if (!err.error.status) this.showPopup('failure', err.error.message)
+      });
+
+    } else {
+      this.showPopup('info', 'Please enter all values to continue!')
+    }
   }
 
   toggleBeneficiaries() {

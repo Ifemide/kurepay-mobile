@@ -1,12 +1,16 @@
 <div class="dashboard">
     <div class="head">
         <div class="background">
-            <div class="balance">
-                <p>Account Balance</p>
-                <h4>{{ localCurrency }} {{ balance | number:'0.2' }}</h4>
-            </div>
-            <div class="transactions">
-                <p><span>75 </span> Transactions in the last 7 days <a> View All</a></p>
+            <div>
+                <div class="balance">
+                    <p>Account Balance</p>
+                    <h4>{{ localCurrency }} {{ balance | number:'0.2' }}</h4>
+                </div>
+                <div class="transactions">
+                    <p><span *ngIf="countTX">{{ countTX }}</span> Transactions in the last 7 days <a
+                            (click)="goToPage('Transactions')"> View All</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -24,42 +28,42 @@
     </div>
 
     <div class="cards">
-        <div class="card left">
-            <h3>Buy Airtime</h3>
+        <div (click)="goToPage('Recharge')" class="card left airtime">
             <div class="options">
-                <img class="left" src="../../assets/imgs/mtn.png" alt="mtn">
-                <img src="../../assets/imgs/airtel.png" alt="airtel">
+                <h3>Buy Airtime</h3>
+                <!-- <img class="left" src="../../assets/imgs/mtn.png" alt="mtn">
+                <img src="../../assets/imgs/airtel.png" alt="airtel"> -->
             </div>
         </div>
-        <div class="card bg-green">
-            <h3>Pay for TV</h3>
+        <div (click)="goToPage('Bills')" class="card bg-green tv">
             <div class="options">
-                <img class="left" src="../../assets/imgs/dstv.png" alt="dstv">
-                <img src="../../assets/imgs/gotv.png" alt="gotv">
+                <h3>Pay for TV</h3>
+                <!-- <img class="left" src="../../assets/imgs/dstv.png" alt="dstv">
+                <img src="../../assets/imgs/gotv.png" alt="gotv"> -->
             </div>
         </div>
     </div>
 
     <div class="red-button">
-        <button>
+        <button (click)="goToPage('Utilities', 'betting')">
             <i class="material-icons">casino</i>
             Sports Betting with KurePay
         </button>
     </div>
 
     <div class="cards">
-        <div class="card left">
-            <h3>Buy Airtime</h3>
+        <div (click)="goToPage('Recharge', 'data')" class="card left data">
             <div class="options">
-                <img class="left" src="../../assets/imgs/mtn.png" alt="mtn">
-                <img src="../../assets/imgs/airtel.png" alt="airtel">
+                <h3>Buy Data</h3>
+                <!-- <img class="left" src="../../assets/imgs/mtn.png" alt="mtn">
+                <img src="../../assets/imgs/airtel.png" alt="airtel"> -->
             </div>
         </div>
-        <div class="card bg-green">
-            <h3>Pay for TV</h3>
+        <div (click)="goToPage('Bills', 'power')" class="card bg-green power">
             <div class="options">
-                <img class="left" src="../../assets/imgs/dstv.png" alt="dstv">
-                <img src="../../assets/imgs/gotv.png" alt="gotv">
+                <h3>Pay for Electricity</h3>
+                <!-- <img class="left" src="../../assets/imgs/dstv.png" alt="dstv">
+                <img src="../../assets/imgs/gotv.png" alt="gotv"> -->
             </div>
         </div>
     </div>

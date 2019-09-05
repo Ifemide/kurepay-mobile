@@ -24,8 +24,7 @@
             <div (click)="changeView('verify')" [ngClass]="{'active' : viewBox === 'verify'}">Verification</div>
         </div>
     </div>
-    <!-- <p class="tab-menu-info" *ngIf="viewBox === 'card'">Note! You will be directed to a payment page to pay</p>
-    <p class="tab-menu-info" *ngIf="viewBox === 'transfer'">Transfer to the account below to fund your wallet</p> -->
+    <!-- <p class="tab-menu-info" *ngIf="viewBox === 'transfer'">Transfer to the account below to fund your wallet</p> -->
 
     <div class="box" *ngIf="viewBox === 'profile'">
         <form #updateProfile="ngForm" (ngSubmit)="onSubmit(updateProfile)">
@@ -52,6 +51,10 @@
                         <!-- <input type="email" disabled aria-disabled="true" name="email_address" [(ngModel)]="email"
                             placeholder="Enter Email Address"> -->
                     </div>
+                </div>
+                <div class="qr">
+                    <qrcode [qrdata]="email" [size]="192" [level]="'M'"></qrcode>
+                    <p>{{ email }}</p>
                 </div>
                 <!-- <currency></currency> -->
                 <!-- <div class="submit-form">
@@ -106,14 +109,28 @@
     </div>
 
     <div class="box" *ngIf="viewBox === 'verify'">
-        <form #kyc="ngForm" (ngSubmit)="kyCustomer(kyc)">
+        <form #kyc="ngForm" (ngSubmit)="verifyIdentity(kyc)">
             <div class="kure-form">
                 <div class="form-inputs">
-                    <div class="text-input">
-                        <label>Idenification Number</label>
+                    <div class="select-input">
+                        <label>Identification Type</label>
+                        <div>
+                            <select name="id_type" [(ngModel)]="id_type">
+                                <option [ngValue]="undefined">Choose Identification Type</option>
+                                <option value="bvn">Bank Verification Number (BVN)</option>
+                                <option value="nin">National Idenification Number (NIN)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div *ngIf="id_type === 'bvn'" class="text-input">
+                        <label>Bank Verification Number (BVN)</label>
                         <input type="text" name="bvn" [(ngModel)]="bvn" placeholder="Enter Your BVN OR NIN">
                     </div>
-                    <div class="text-input" *ngIf="otp">
+                    <div *ngIf="id_type === 'nin'" class="text-input">
+                        <label>National Idenification Number (NIN)</label>
+                        <input type="text" name="bvn" [(ngModel)]="bvn" placeholder="Enter Your BVN OR NIN">
+                    </div>
+                    <div *ngIf="id_type && otp" class="text-input">
                         <label>Phone Number</label>
                         <input type="text" name="phone_number" [(ngModel)]="phone_number"
                             placeholder="Enter Your Phone Number">
@@ -125,7 +142,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="submit-form">
+                <div *ngIf="id_type" class="submit-form">
                     <div>
                         <button *ngIf="!loading">{{ refCode ? 'Complete' : 'Start' }} Verification</button>
                         <div *ngIf="loading" class="button">
@@ -135,6 +152,7 @@
                 </div>
             </div>
         </form>
+        <p class="tab-menu-info" *ngIf="viewBox === 'verify'">Disclaimer text here..</p>
     </div>
 </div>
 

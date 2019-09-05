@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the LoaderComponent component.
@@ -15,13 +17,18 @@ export class PopupComponent {
   @Input() popup: any;
   popupText: any;
 
-  constructor() {
+  constructor(private navCtrl: NavController, private storage: Storage) {
   }
 
   ionViewDidLoad() {
   }
 
   ionViewWillEnter() {
+  }
+
+  goToLogin() {
+    this.storage.clear();
+    this.navCtrl.setRoot('LoginPage');
   }
 
 }

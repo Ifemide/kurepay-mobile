@@ -15,7 +15,10 @@ import { InterceptorProvider } from '../providers/interceptor/interceptor';
 import { QRCodeModule } from 'angularx-qrcode';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { Clipboard } from '@ionic-native/clipboard';
+
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataProvider,
     ApiProvider,
+    BarcodeScanner,
+    BackgroundMode,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi: true },
     InAppBrowser
   ]

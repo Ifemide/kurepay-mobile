@@ -7,9 +7,12 @@
       <i style="color:#DD2626 !important" *ngIf="popup.type === 'failure'" class="material-icons">cancel</i>
       <i style="color:#FC5D00 !important" *ngIf="popup.type === 'info'" class="material-icons">info</i>
     </div>
-    <p class="display-text">{{ popup.text }}</p>
+    <p class="display-text">{{ popup.text === 'invalid token' 
+      ? 'Your session has expired! Please login to continue..' 
+      : popup.text }}</p>
     <div class="popup-button">
-      <button>Close</button>
+      <button *ngIf="popup.text != 'invalid token'">Close</button>
+      <button (click)="goToLogin()" *ngIf="popup.text === 'invalid token'">Login</button>
     </div>
   </div>
 </div>

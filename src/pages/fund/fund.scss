@@ -26,6 +26,27 @@ page-fund {
         color: #006577;
     }
 
+    .box-details div p:first-child {
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+    }
+
+    .box-details div p:first-child span {
+        font-size: 12px;
+        padding: 2px 5px;
+        color: #006577;
+        display: flex;
+        align-items: center;
+    }
+
+    .box-details div p:first-child span i {
+        font-size: 14px;
+        color: #006577;
+        font-weight: 400;
+        margin-right: 2px;
+    }
+
     .text-input-icon .display {
         display: flex;
         align-items: center;
@@ -38,5 +59,35 @@ page-fund {
         padding-top: 2px;
         color: #006577;
         font-weight: 400;
+    }
+
+    .qr {
+        width: 100%;
+    }
+
+    .qr img {
+        margin: 0 auto;
+    }
+
+    .display {
+        margin-top: 8px;
+    }
+
+    .qr p, .qr label {
+        text-align: center;
+    }
+
+    .qr .copy-qr {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #006577;
+        margin: 0;
+        padding: 4px;
+    }
+
+    .qr .copy-qr i {
+        margin-right: 5px;
+        font-size: 16px;
     }
 }

@@ -43,6 +43,9 @@ export class UtilitiesPage {
       this.smsRoutes = res.SMS;
       this.waecObj = res.Education[0];
     });
+    if (this.navParams.data.tab) {
+      this.viewBox = this.navParams.data.tab;
+    }
   }
 
   sendSMS(val) {

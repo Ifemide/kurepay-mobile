@@ -14,6 +14,7 @@ export class LoginPage {
   notify = false;
   notifyText = '';
   loading = false;
+  reset = false;
   popup = false;
   popupText = {
     type: '',
@@ -39,12 +40,13 @@ export class LoginPage {
       if (res.token) {
         data.reset();
         this.loading = false;
-        this._data.changeCurrency('USD');
+        this._data.changeCurrency(res.localCurrency);
         this.storage.set('auth_token', res.token);
         this.storage.set('email', res.email);
         this.storage.set('first_name', res.firstname);
         this.storage.set('last_name', res.lastname);
         this.storage.set('balance', res.balance);
+        this.storage.set('isLoggedIn', true);
         this.goToPage('Dashboard');
       }
     }, err => {
@@ -64,6 +66,41 @@ export class LoginPage {
         }
         data.reset();
       }
+    });
+  }
+
+  showResetPassword() {
+    this.reset = !this.reset;
+  }
+
+  resetPassword(password) {
+    this.loading = true;
+    const data = {
+      email: password.value.email_address
+    }
+    this._api.validEmail(data).subscribe((res: any) => {
+      if (res.status === true) {
+        console.log(password.value);
+        const data = {
+          email: password.value.email_address
+        };
+
+        this._api.resetPassword(data).subscribe((res: any) => {
+          this.loading = false;
+          if (res.status === false || res.status === true) {
+            this.showPopup('success', res.message);
+            this.showResetPassword();
+          }
+        }, err => {
+          this.loading = false;
+          console.log(err);
+          if (!err.error.status) this.showPopup('failure', err.error.message)
+        });
+      }
+    }, err => {
+      this.loading = false;
+      console.log(err);
+      if (!err.error.status) this.showPopup('failure', err.error.message)
     });
   }
 

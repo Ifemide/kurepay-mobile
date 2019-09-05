@@ -57,7 +57,7 @@
             </div> -->
           </div>
           <div *ngIf="accountName" class="text-input">
-            <label>Amount (NGN)</label>
+            <label>Amount ({{ localCurrency }})</label>
             <input type="number" name="trans_amount" [(ngModel)]="trans_amount" placeholder="Enter Amount to Transfer">
           </div>
           <!-- <div class="text-input-icon">
@@ -86,7 +86,7 @@
             <button *ngIf="otpBank">Complete Transaction</button>
             <!-- <p>OTP timed out<br>Generate new OTP Code</p> Optional -->
           </div>
-          <p class="tab-menu-info">NGN {{ 50 | number:'0.2' }} transfer charge applies</p>
+          <!-- <p class="tab-menu-info">NGN {{ 50 | number:'0.2' }} transfer charge applies</p> -->
         </div>
       </div>
     </form>
@@ -108,12 +108,16 @@
           <div class="text-input">
             <label>Cryptocurrency Wallet Address</label>
             <input type="text" name="wallet_address" [(ngModel)]="wallet_address" placeholder="Enter Wallet Address">
+            <label (click)="scan()" class="below-input"><i class="material-icons">crop_free</i>Scan a QR Code</label>
           </div>
+          {{ qrdata | json}}
           <div class="text-input">
-            <label>Amount (NGN)</label>
+            <label>Amount ({{ localCurrency }})</label>
             <input type="number" value="" name="amount_to_transfer" [(ngModel)]="amount_to_transfer"
               placeholder="Enter Amount to Transfer">
           </div>
+          <!-- <p (click)="scan()">Scan a QR Code</p> -->
+          <div *ngIf="qrdata">Result: {{ qrdata }}</div>
           <div class="otp-code" *ngIf="otpCrypto">
             <div class="text-input">
               <label class="white">Enter the OTP sent to your email</label>
@@ -126,8 +130,8 @@
             <img class="center" src="../../assets/icon/button-loader.gif" alt="">
           </div>
           <div class="side-text">
-            <button (click)="showCryptoOTP()" *ngIf="!otpCrypto">Transfer Money</button>
-            <button (click)="onSubmitCrypto(viaCryptoForm)" *ngIf="otpCrypto">Complete Transaction</button>
+            <button (click)="showCryptoOTP(viaCryptoForm)" *ngIf="!otpCrypto && !loading">Transfer Money</button>
+            <button (click)="onSubmitCrypto(viaCryptoForm)" *ngIf="otpCrypto && !loading">Complete Transaction</button>
             <!-- <p>OTP timed out<br>Generate new OTP Code</p> Optional -->
           </div>
           <!-- <p class="tab-menu-info"></p> -->
@@ -144,7 +148,7 @@
             <input type="email" name="recipient_email" [(ngModel)]="recipient_email" placeholder="Enter Email Address">
           </div>
           <div class="text-input">
-            <label>Amount (NGN)</label>
+            <label>Amount ({{ localCurrency }})</label>
             <input type="number" name="amount_to_transfer" [(ngModel)]="amount_to_transfer"
               placeholder="Enter Amount to Transfer">
           </div>
@@ -160,11 +164,11 @@
             <img class="center" src="../../assets/icon/button-loader.gif" alt="">
           </div>
           <div class="side-text">
-            <button (click)="showWalletOTP()" *ngIf="!otpWallet">Transfer Money</button>
-            <button (click)="onSubmitWallet(viaWalletForm)" *ngIf="otpWallet">Complete Transaction</button>
+            <button (click)="showWalletOTP(viaWalletForm)" *ngIf="!otpWallet && !loading">Transfer Money</button>
+            <button (click)="onSubmitWallet(viaWalletForm)" *ngIf="otpWallet && !loading">Complete Transaction</button>
             <!-- <p>OTP timed out<br>Generate new OTP Code</p> Optional -->
           </div>
-          <p class="tab-menu-info">NGN {{ 50 | number:'0.2' }} transfer charge applies</p>
+          <!-- <p class="tab-menu-info">NGN {{ 50 | number:'0.2' }} transfer charge applies</p> -->
         </div>
       </div>
     </form>

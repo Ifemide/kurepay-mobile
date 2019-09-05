@@ -35,6 +35,8 @@ export class BillsPage {
   localCurrency: string;
   balance: number;
   tvOptions: any;
+  prepaidOptions: any;
+  postpaidOptions: any;
   powerOptions: any;
   cable_package: any;
   cable_bouquet: any;
@@ -44,6 +46,7 @@ export class BillsPage {
     type: '',
     text: ''
   };
+  meter_type: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private data: DataProvider,
     private storage: Storage, private api: ApiProvider) {
@@ -58,8 +61,14 @@ export class BillsPage {
     });
     this.api.jsonData().subscribe((res: any) => {
       this.tvOptions = res.TV;
-      this.powerOptions = res.Electricity;
+      this.prepaidOptions = res.ElectricityPrepaid;
+      this.postpaidOptions = res.ElectricityPostpaid;
+      console.log(this.prepaidOptions);
+      console.log(this.postpaidOptions);
     });
+    if (this.navParams.data.tab) {
+      this.viewBox = this.navParams.data.tab;
+    }
   }
 
   cablePayment(val) {
@@ -133,6 +142,12 @@ export class BillsPage {
         this.showPopup('failure', err.error.message);
       }
     });
+  }
+
+  chooseMeterType(type) {
+    console.log(type);
+    if (type === 'prepaid') this.powerOptions = this.prepaidOptions;
+    if (type === 'postpaid') this.powerOptions = this.postpaidOptions;
   }
 
   showPopup(type, text) {

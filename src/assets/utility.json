@@ -512,50 +512,56 @@
             "name": "WAEC Scratch Card"
         }
     ],
-    "Electricity": [
+    "ElectricityPrepaid": [
         {
             "id": "4",
             "name": "Port Harcourt Electricity Payment - PREPAID"
-        },
-        {
-            "id": "27",
-            "name": "Port Harcourt Electricity Payment - POSTPAID"
         },
         {
             "id": "28",
             "name": "Enugu Electricity Payment - PREPAID"
         },
         {
-            "id": "25",
-            "name": "Enugu Electricity Payment - POSTPAID"
-        },
-        {
             "id": "1",
             "name": "Ikeja Electricity Payment - PREPAID"
-        },
-        {
-            "id": "10",
-            "name": "Ikeja Electricity Payment - POSTPAID"
         },
         {
             "id": "12",
             "name": "Eko Electricity Payment - PREPAID"
         },
         {
-            "id": "13",
-            "name": "Eko Electricity Payment - POSTPAID"
-        },
-        {
             "id": "11",
             "name": "Ibadan Electricity Payment - PREPAID"
         },
         {
-            "id": "33",
-            "name": "Ibadan Electricity Payment - POSTPAID"
-        },
-        {
             "_id": "2",
             "name": "Abuja Electricity Payment - PREPAID"
+        },
+        {
+            "id": "36",
+            "name": "RensourceEnergy Payment"
+        }
+    ],
+    "ElectricityPostpaid": [
+        {
+            "id": "27",
+            "name": "Port Harcourt Electricity Payment - POSTPAID"
+        },
+        {
+            "id": "25",
+            "name": "Enugu Electricity Payment - POSTPAID"
+        },
+        {
+            "id": "10",
+            "name": "Ikeja Electricity Payment - POSTPAID"
+        },
+        {
+            "id": "13",
+            "name": "Eko Electricity Payment - POSTPAID"
+        },
+        {
+            "id": "33",
+            "name": "Ibadan Electricity Payment - POSTPAID"
         },
         {
             "id": "36",

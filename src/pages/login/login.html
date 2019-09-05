@@ -38,17 +38,41 @@
     <div class="container">
       <div class="content">
         <img src="../../assets/imgs/kp-logo-full.png" alt="">
-        <form (ngSubmit)="loginUser(login)" #login="ngForm">
+        <form *ngIf="!reset" (ngSubmit)="loginUser(login)" #login="ngForm">
           <input type="email" name="email_address" [(ngModel)]="email_address" placeholder="Email Address">
           <input type="password" name="password" [(ngModel)]="password" placeholder="Password">
+          <div (click)="showResetPassword()" class="forgot-password">
+            <p>Forgot Password?</p>
+          </div>
           <div>
-            <button *ngIf="!loading">Login</button>
+            <button *ngIf="!notify && !loading">Login</button>
             <div *ngIf="loading" class="load-button">
-              <img src="../../assets/icon/button-loader.gif" alt="">
+              <img src="../../assets/icon/login-loader.svg" alt="">
             </div>
+          </div>
+          <div *ngIf="notify" class="error-box">
+            <p>{{ notifyText ? notifyText : 'Error!' }}</p>
+            <i class="material-icons" (click)="closeNotify()">cancel</i>
           </div>
           <div class="sub-button">
             <p>Don't have an account? <span (click)="goToPage('Signup')">Signup</span></p>
+          </div>
+        </form>
+        <form *ngIf="reset" (ngSubmit)="resetPassword(password)" #password="ngForm">
+          <input type="email" name="email_address" [(ngModel)]="email_address" placeholder="Email Address">
+          <div>
+            <button *ngIf="!notify && !loading">Reset Password</button>
+            <div *ngIf="loading" class="load-button">
+              <img src="../../assets/icon/login-loader.svg" alt="">
+            </div>
+          </div>
+          <div *ngIf="notify" class="error-box">
+            <p>{{ notifyText ? notifyText : 'Error!' }}</p>
+            <i class="material-icons" (click)="closeNotify()">cancel</i>
+          </div>
+          <div (click)="showResetPassword()" class="forgot-password">
+            <!-- <p><span>Back To Login</span></p> -->
+            <p>Back To Login</p>
           </div>
         </form>
       </div>

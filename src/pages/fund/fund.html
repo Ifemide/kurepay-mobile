@@ -38,15 +38,13 @@
                     </div>
                     <div *ngIf="viewAddress" class="text-input-icon">
                         <label>Address</label>
-                        <p class="display">{{ qrdata }} <i (click)="copyAddress()"
-                                class="material-icons copy">filter_none</i></p>
-                        <!-- <div>
-                            <input type="text" #address disabled aria-disabled="true" [value]="qrdata">
-                            <i (click)="copyAddress(address.value)" class="material-icons colored">filter_none</i>
-                        </div> -->
                     </div>
                     <div *ngIf="viewAddress" class="qr">
                         <qrcode [qrdata]="qrdata" [size]="192" [level]="'M'"></qrcode>
+                        <p class="display">{{ qrdata }}</p>
+                        <p class="copy-qr" (click)="copyAddress()">
+                            <i class="material-icons copy">filter_none</i><span>Copy Address</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -63,20 +61,23 @@
                     </div>
                     <div class="text-input-icon">
                         <label>Transaction Fees</label>
-                        <p class="display">{{ fund_amount === NaN ? '0.00' : fund_amount * 0.015 | number:'0.2' }}</p>
-                        <!-- <div>
-                            <input class="display" type="text" [value]="fund_amount === NaN ? '0' : fund_amount * 0.015"
-                                name="transaction_fees" [(ngModel)]="transaction_fees" disabled aria-disabled="true">
-                        </div> -->
+                        <p class="display">
+                            {{  fund_amount === NaN 
+                                    ? '0.00' 
+                                    : fund_amount * 0.015 > 2500 
+                                            ? '2,500.00' 
+                                            : fund_amount * 0.015 | number:'0.2' }}
+                        </p>
                     </div>
                     <div class="text-input-icon">
                         <label>Amount to Receive in Wallet</label>
                         <p class="display">
-                            {{ fund_amount === NaN ? '0.00' : fund_amount - (fund_amount * 0.015) | number:'0.2' }}</p>
-                        <!-- <div>
-                            <input class="display" type="number" [value]="fund_amount - (fund_amount * 0.015)"
-                                name="amount_to_receive" [(ngModel)]="amount_to_receive" disabled aria-disabled="true">
-                        </div> -->
+                            {{  fund_amount === NaN 
+                                    ? '0.00' 
+                                    : fund_amount * 0.015 > 2500 
+                                            ? (fund_amount - 2500 | number:'0.2')
+                                            : fund_amount - (fund_amount * 0.015) | number:'0.2' }}
+                        </p>
                     </div>
                 </div>
                 <div class="submit-form">
@@ -87,8 +88,7 @@
                         </div>
                     </div>
                     <p class="tab-menu-info" *ngIf="viewBox === 'card'">Note! You will be directed to a payment
-                        page to
-                        pay</p>
+                        page to pay</p>
                 </div>
             </div>
         </form>
@@ -98,7 +98,11 @@
             <div>
                 <img src="../../assets/imgs/sterling.png" alt="Sterling Bank">
                 <div>
-                    <p>0069606129</p>
+                    <p>0069606129
+                        <span (click)="copyAccountNumber('0069606129')">
+                            <i class="material-icons">filter_none</i> Copy Number
+                        </span>
+                    </p>
                     <p>Baywise Technology Ltd.</p>
                     <p>Sterling Bank</p>
                 </div>

@@ -25,6 +25,10 @@
     <img class="center" src="../../assets/icon/button-loader.gif" alt="">
   </div>
   <div *ngIf="!loading" class="cards">
+    <div *ngIf="transactions.length <= 0">
+      <p class="no-transactions" style="text-align: center">Nothing to see here till you transact
+        <br><br><span>🌚</span></p>
+    </div>
     <div class="card" *ngFor="let transaction of transactions">
       <div class="left">
         <p class="to">[{{ transaction.isCredit ? 'From' : 'To' }}]</p>

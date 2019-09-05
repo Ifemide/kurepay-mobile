@@ -56,11 +56,15 @@
           <input type="email" name="email_address" [(ngModel)]="email_address" placeholder="Enter Email" value="">
           <input type="password" name="password" [(ngModel)]="password" placeholder="Enter Password" value="">
           <input type="password" name="password2" [(ngModel)]="password2" placeholder="Confirm Password" value="">
-          <div>
+          <div *ngIf="!notify">
             <button *ngIf="!loading">Signup</button>
             <div *ngIf="loading" class="load-button">
               <img src="../../assets/icon/button-loader.gif" alt="">
             </div>
+          </div>
+          <div *ngIf="notify" class="error-box">
+            <p>{{ notifyText ? notifyText : 'Error!' }}</p>
+            <i class="material-icons" (click)="closeNotify()">cancel</i>
           </div>
           <div class="sub-button">
             <p>Already have an account? <span (click)="goToPage('Login')">Login</span></p>
