@@ -50,7 +50,7 @@
                     </div>
                     <div class="text-input">
                         <label>Phone Number</label>
-                        <input type="text" [(ngModel)]="phone_number" name="phone_number"
+                        <input type="tel" [(ngModel)]="phone_number" name="phone_number"
                             placeholder="Enter Phone Number">
                     </div>
                 </div>
@@ -92,12 +92,12 @@
                     </div>
                     <div class="text-input">
                         <label>Meter Number</label>
-                        <input type="number" [(ngModel)]="meter_number" name="meter_number"
+                        <input type="tel" [(ngModel)]="meter_number" name="meter_number"
                             placeholder="Enter Meter Number">
                     </div>
                     <div class="text-input">
                         <label>Amount (NGN)</label>
-                        <input type="number" [(ngModel)]="amount" name="amount" placeholder="Enter Amount">
+                        <input type="tel" [(ngModel)]="amount" name="amount" placeholder="Enter Amount">
                     </div>
                     <div *ngIf="meter_type === 'prepaid'" class="text-input">
                         <label>Email Address</label>

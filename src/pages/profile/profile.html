@@ -124,15 +124,15 @@
                     </div>
                     <div *ngIf="id_type === 'bvn'" class="text-input">
                         <label>Bank Verification Number (BVN)</label>
-                        <input type="text" name="bvn" [(ngModel)]="bvn" placeholder="Enter Your BVN OR NIN">
+                        <input type="tel" name="bvn" [(ngModel)]="bvn" placeholder="Enter Your BVN OR NIN">
                     </div>
                     <div *ngIf="id_type === 'nin'" class="text-input">
                         <label>National Idenification Number (NIN)</label>
-                        <input type="text" name="bvn" [(ngModel)]="bvn" placeholder="Enter Your BVN OR NIN">
+                        <input type="tel" name="bvn" [(ngModel)]="bvn" placeholder="Enter Your BVN OR NIN">
                     </div>
                     <div *ngIf="id_type && otp" class="text-input">
                         <label>Phone Number</label>
-                        <input type="text" name="phone_number" [(ngModel)]="phone_number"
+                        <input type="tel" name="phone_number" [(ngModel)]="phone_number"
                             placeholder="Enter Your Phone Number">
                     </div>
                     <div class="otp-code" *ngIf="otp">

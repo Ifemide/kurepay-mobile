@@ -33,7 +33,7 @@
           </div>
           <div class="text-input">
             <label>Phone Number</label>
-            <input type="text" [(ngModel)]="phone_number" name="phone_number" placeholder="Enter Phone Number">
+            <input type="tel" [(ngModel)]="phone_number" name="phone_number" placeholder="Enter Phone Number">
           </div>
           <div class="text-input">
             <label>Text Message</label>
@@ -60,7 +60,7 @@
         <div class="form-inputs">
           <div class="text-input">
             <label>Number of Scratch Pins</label>
-            <input type="text" (input)="calcAmount(scratch_pins)" [(ngModel)]="scratch_pins" name="scratch_pins"
+            <input type="tel" (input)="calcAmount(scratch_pins)" [(ngModel)]="scratch_pins" name="scratch_pins"
               placeholder="Enter Number of Pins to Purchase">
           </div>
           <div class="text-input-icon">
