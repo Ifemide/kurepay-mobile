@@ -30,7 +30,7 @@
                 Choose from beneficiaries</label>
             </div> -->
             <label>Account Number</label>
-            <input type="text" (change)="getAccountName(account_num, local_bank)" name="account_num"
+            <input type="tel" (change)="getAccountName(account_num, local_bank)" name="account_num"
               [(ngModel)]="account_num" placeholder="Enter Account Number">
             <!-- <select *ngIf="beneficiaries" name="beneficiary_name" [(ngModel)]="beneficiary_name">
               <option [ngValue]="undefined">Choose Beneficiaries</option>
@@ -58,7 +58,7 @@
           </div>
           <div *ngIf="accountName" class="text-input">
             <label>Amount ({{ localCurrency }})</label>
-            <input type="number" name="trans_amount" [(ngModel)]="trans_amount" placeholder="Enter Amount to Transfer">
+            <input type="tel" name="trans_amount" [(ngModel)]="trans_amount" placeholder="Enter Amount to Transfer">
           </div>
           <!-- <div class="text-input-icon">
             <label>Amount You Will Be Charged</label>
@@ -146,6 +146,8 @@
           <div class="text-input">
             <label>Kurepay Recipient Email Address</label>
             <input type="email" name="recipient_email" [(ngModel)]="recipient_email" placeholder="Enter Email Address">
+            <label (click)="scanEmail()" class="below-input"><i class="material-icons">crop_free</i>Scan a QR
+              Code</label>
           </div>
           <div class="text-input">
             <label>Amount ({{ localCurrency }})</label>

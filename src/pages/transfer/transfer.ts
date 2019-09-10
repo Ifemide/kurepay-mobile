@@ -41,6 +41,7 @@ export class TransferPage {
     prompt: 'Place a QR Code inside the viewfinder rectangle to scan it'
   };
   wallet_address: string;
+  recipient_email: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private _data: DataProvider,
     private storage: Storage, private _api: ApiProvider, private barcodeScanner: BarcodeScanner) {
@@ -66,6 +67,15 @@ export class TransferPage {
     this.barcodeScanner.scan(this.options).then(barcodeData => {
       console.log('Barcode data', barcodeData);
       this.wallet_address = barcodeData.text;
+    }).catch(err => {
+      console.log('Error', err);
+    });
+  }
+
+  scanEmail() {
+    this.barcodeScanner.scan(this.options).then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+      this.recipient_email = barcodeData.text;
     }).catch(err => {
       console.log('Error', err);
     });
