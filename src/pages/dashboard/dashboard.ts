@@ -39,14 +39,16 @@ export class DashboardPage {
       this.balance = res.data.balance;
       this._data.changeCurrency(res.data.localCurrency);
       this.storage.set('balance', res.data.balance);
+      this.storage.set('user_id', res.data._id);
     });
 
     this.api.allTransactions().subscribe((res: any) => {
+      console.log(res);
       if (res.status === true) {
         this.countTX = res.data.length;
         console.log(this.countTX);
       }
-    }, err => { if (!err.error.status) this.showPopup('failure', err.error.message) });
+    }, err => { console.log(err); if (err.error.status === false) this.showPopup('failure', err.error.message) });
   }
 
   ionViewDidLoad() {

@@ -1,6 +1,6 @@
 <div class="transactions">
   <div class="header">
-    <p>Transactions (NGN)</p>
+    <p>Transactions ({{ localCurrency }})</p>
     <div class="user-details">
       <p>{{ localCurrency }} {{ balance | number:'0.2' }}</p>
     </div>
@@ -25,20 +25,19 @@
     <img class="center" src="../../assets/icon/button-loader.gif" alt="">
   </div>
   <div *ngIf="!loading" class="cards">
-    <div *ngIf="transactions.length <= 0">
-      <p class="no-transactions" style="text-align: center">Nothing to see here till you transact
-        <br><br><span>🌚</span></p>
+    <div class="no-transactions" *ngIf="transactions.length <= 0">
+      <p>Nothing to see here till you transact..</p>
     </div>
     <div class="card" *ngFor="let transaction of transactions">
       <div class="left">
-        <p class="to">[{{ transaction.isCredit ? 'From' : 'To' }}]</p>
-        <p class="text">{{ transaction.isCredit ? transaction.from : transaction.to }}</p>
+        <p class="to">[{{ transaction.receiver === userId ? 'From' : 'To' }}]</p>
+        <p class="text">{{ transaction.receiver === userId ? transaction.from : transaction.to }}</p>
       </div>
       <div class="right">
         <p class="date">{{ transaction.createdAt | date }}</p>
-        <p [class.green]="transaction.isCredit" [class.red]="!transaction.isCredit">
-          {{ transaction.isCredit ? transaction.receivedCurrency : transaction.sentCurrency }}
-          {{ transaction.isCredit ? transaction.originalAmount : transaction.originalAmount | number:'0.2' }}
+        <p [class.green]="transaction.receiver === userId" [class.red]="!(transaction.receiver === userId)">
+          {{ transaction.receiver === userId ? transaction.receivedCurrency : transaction.sentCurrency }}
+          {{ transaction.receiver === userId ? (transaction.receivedAmount | number:'0.2') : (transaction.originalAmount | number:'0.2') }}
         </p>
       </div>
     </div>

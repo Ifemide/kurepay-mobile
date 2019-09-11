@@ -25,6 +25,7 @@ export class TransactionsPage {
     text: ''
   };
   transactions: any;
+  userId: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private _data: DataProvider,
     private storage: Storage, private api: ApiProvider) {
@@ -36,6 +37,9 @@ export class TransactionsPage {
   ngOnInit() {
     this.storage.get('balance').then(value => {
       this.balance = value;
+    });
+    this.storage.get('user_id').then(value => {
+      this.userId = value;
     });
     this.api.allTransactions().subscribe((res: any) => {
       if (res.status) {

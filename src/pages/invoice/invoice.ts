@@ -37,6 +37,7 @@ export class InvoicePage {
   counter = 0;
   invoiceForm: FormGroup;
   items: FormArray;
+  invoices: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private _data: DataProvider,
     private storage: Storage, private fb: FormBuilder, private api: ApiProvider) {
@@ -63,6 +64,17 @@ export class InvoicePage {
 
   changeView(opt) {
     this.viewBox = opt;
+    if (opt === 'invoices') {
+      this.getInvoices();
+    }
+  }
+
+  getInvoices() {
+    this.api.allInvoices().subscribe((res: any) => {
+      if (res.status) {
+        this.invoices = res.data;
+      }
+    });
   }
 
   createInvoice(val) {
@@ -97,6 +109,7 @@ export class InvoicePage {
       console.log(res);
       if (res.status === true) {
         this.showPopup('success', res.message);
+        this.invoiceForm.reset();
       } else {
         this.showPopup('failure', res.message);
       }

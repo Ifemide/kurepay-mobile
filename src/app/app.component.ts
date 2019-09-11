@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Platform, AlertController } from 'ionic-angular';
+import { Platform, AlertController, App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { DataProvider } from '../providers/data/data';
+// import { LoginPage } from '../pages/login/locgin';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,7 +16,7 @@ export class MyApp {
   public alertShown: boolean = false;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage: Storage,
-    alertCtrl: AlertController, backgroundMode: BackgroundMode, data: DataProvider) {
+    alertCtrl: AlertController, backgroundMode: BackgroundMode, data: DataProvider, app: App) {
     platform.ready().then(() => {
       statusBar.overlaysWebView(false);
       statusBar.backgroundColorByHexString('#f5f5f5');
@@ -64,6 +65,50 @@ export class MyApp {
         }
       }, 0);
     });
+    this.initInterval();
+    // if (this.isTimeout) {
+    //   console.log('Session Timed Out');
+    //   this.rootPage = "LoginPage";
+    //   // app.getActiveNav().setRoot(LoginPage)
+    // }
   }
+
+  lastAction = Date.now();
+  MINUTES_UNITL_AUTO_LOGOUT = 1;
+  CHECK_INTERVAL = 1000;
+  now: any;
+  timeleft: any;
+  diff: any;
+  isTimeout: any;
+  interval: any;
+
+  initListener() {
+    console.log('New Session Started');
+    this.reset();
+  }
+
+  initInterval() {
+    this.interval = setInterval(() => {
+      this.check();
+    }, this.CHECK_INTERVAL);
+  }
+
+  reset() {
+    this.lastAction = Date.now();
+  }
+
+  check() {
+    this.now = Date.now();
+    this.timeleft = this.lastAction + (this.MINUTES_UNITL_AUTO_LOGOUT * 60 * 1000);
+    this.diff = this.timeleft - this.now;
+    this.isTimeout = this.diff < 0;
+
+    if (this.isTimeout) {
+      console.log('Session Timed Out');
+      this.rootPage = "LoginPage";
+      clearInterval(this.interval);
+    }
+  }
+
 }
 

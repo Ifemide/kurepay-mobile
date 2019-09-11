@@ -125,6 +125,10 @@ export class ApiProvider {
     return this._http.get(`${this.url}transactions`);
   }
 
+  allInvoices() {
+    return this._http.get(`${this.url}invoice`);
+  }
+
   newInvoice(data) {
     return this._http.post(`${this.url}invoice`, data);
   }

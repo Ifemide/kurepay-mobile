@@ -72,7 +72,7 @@
   <div class="box" *ngIf="viewBox === 'invoices'">
 
     <div class="date-filter">
-      <button class="button" *ngIf="!activeFilter" (click)="showFilter()">Filter Transactions By Date</button>
+      <button class="button" *ngIf="!activeFilter" (click)="showFilter()">Filter Invoices By Date</button>
       <div *ngIf="activeFilter">
         <p class="filter-label">Start Date</p>
         <ejs-datepicker id='datepicker' placeholder='Select a date' [value]='dateValue' [min]='minDate' [max]='maxDate'>
@@ -87,18 +87,19 @@
     </div>
 
     <div class="cards">
-      <div>
-        <div class="card">
-          <div class="left">
-            <p class="pending">[Pending]</p>
-            <p class="text">kendrawalker@yahoo.com</p>
-          </div>
-          <div class="right">
-            <p class="date"><span>Expires </span> Jul 11, 2019</p>
-            <p>4,500.00</p>
-          </div>
+      <!-- <div> -->
+      <div *ngFor="let invoice of invoices" class="card">
+        <div class="left">
+          <p class="pending">[Pending]</p>
+          <p class="text">{{ invoice.receiver_name }}</p>
+          <p class="text">{{ invoice.receiver_mail }}</p>
         </div>
-        <div class="card">
+        <div class="right">
+          <p class="date"><span>Expires </span> {{ invoice.due_date | date }}</p>
+          <p>4,500.00</p>
+        </div>
+      </div>
+      <!-- <div class="card">
           <div class="left">
             <p class="paid">[Paid]</p>
             <p class="text">supply@richconfectionaries.com.ng</p>
@@ -108,7 +109,7 @@
             <p>18,750.00</p>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
